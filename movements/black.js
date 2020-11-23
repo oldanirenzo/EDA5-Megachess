@@ -50,7 +50,7 @@ let valueMovimiento = {
     b: 40,
     r: 60,
     q: 70,
-    k: 100
+    k: 100,
 }
 
 const blackPiecesMovements = async (board) => {
