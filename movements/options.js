@@ -13,6 +13,7 @@ const decideAction = (data) => {
                         resolve(challenge)
                     })
                     .catch(err => reject(err))
+                break;
             case 'your_turn':
 
                 if (data.data.actual_turn === 'white') {
@@ -21,6 +22,8 @@ const decideAction = (data) => {
                             resolve(movement)
                         })
                         .catch(err => reject(err))
+                    console.log(data.data)
+
                 }
                 if (data.data.actual_turn === 'black') {
                     blackMovements(data)
@@ -28,8 +31,9 @@ const decideAction = (data) => {
                             resolve(movement)
                         })
                         .catch(err => reject(err))
+                    console.log(data.data)
                 }
-
+                break;
             case 'gameover':
                 console.log(data)
                 break;

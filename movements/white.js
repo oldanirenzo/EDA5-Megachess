@@ -1,10 +1,12 @@
+const matriz = require("./matriz");
 
-const blacks = 'phbrqk';
+const blacks = 'kqrbhp';
 const whites = 'PHBRQK';
 
-
+let whiteMovementsArray = []
 
 const whiteMovements = (data) => {
+
     return new Promise((resolve, reject) => {
 
         let board_id = data.data.board_id;
@@ -12,29 +14,26 @@ const whiteMovements = (data) => {
         let board = matriz(data)
 
         whitePiecesMovements(board)
-            .then(movement => {
+            .then(() => {
+                let bestMovement = whiteMovementsArray.reduce((acum, actual) => acum.value > actual.value ? acum : actual)
                 resolve({
                     action: 'move',
                     data: {
                         board_id,
                         turn_token,
-                        from_row: movimiento.from_row,
-                        from_col: movimiento.from_col,
-                        to_row: movimiento.to_row,
-                        to_col: movimiento.to_col,
+                        from_row: bestMovement.from_row,
+                        from_col: bestMovement.from_col,
+                        to_row: bestMovement.to_row,
+                        to_col: bestMovement.to_col,
                     }
                 })
             })
             .catch(err => reject(err))
+            .finally(() => {
+                whiteMovementsArray = []
+                bestMovement = []
+            })
     })
-}
-
-let movimiento = {
-    value: 0,
-    from_row: 0,
-    from_col: 0,
-    to_row: 0,
-    to_col: 0
 }
 
 let value = {
@@ -56,280 +55,344 @@ let valueMovimiento = {
 }
 
 const whitePiecesMovements = async (board) => {
-    try {
-        await whitePawnMovement(board);
-        await whiteQueenMovement(board);
-    } catch (err) {
-        console.log('Error Blancas: ' + err)
-    }
-
+    return new Promise((resolve, reject) => {
+        whiteQueenMovement(board)
+            .then(() => {
+                whitePawnMovement(board)
+                    .then(() => {
+                        resolve()
+                    })
+                    .catch(err => reject(err))
+            })
+            .catch(err => reject(err))
+    })
 }
-
-
-
-const whitePawnMovement = (board) => {
-    let from_row, from_col;
-    while (true) {
-
-        from_row = Math.floor(Math.random() * (14 - 9) + 9);
-        from_col = Math.floor(Math.random() * (16));
-        if (board[from_row][from_col] === 'P') {
-
-            if (board[from_row - 1][from_col] === ' ') {
-
-                if (board[from_row - 2][from_col] === ' ') {
-                    if (from_row === 12 || from_row === 13) {
-                        movimiento.value = 35;
-                        movimiento.from_row = from_row;
-                        movimiento.from_col = from_col;
-                        movimiento.to_row = from_row - 2;
-                        movimiento.to_col = from_col;
-                    }
-                }
-                if (blacks.includes(board[from_row - 1][from_col + 1])) {
-                    if (value[board[from_row - 1][from_col + 1]] > movimiento.value) {
-                        movimiento.value = value[board[from_row - 1][from_col + 1]];
-                        movimiento.from_row = from_row;
-                        movimiento.from_col = from_col;
-                        movimiento.to_row = from_row - 1;
-                        movimiento.to_col = from_col + 1;
-                    }
-                }
-                if (blacks.includes(board[from_row - 1][from_col - 1])) {
-                    if (value[board[from_row - 1][from_col + 1]] > movimiento.value) {
-                        movimiento.value = value[board[from_row - 1][from_col - 1]]
-                        movimiento.from_row = from_row;
-                        movimiento.from_col = from_col;
-                        movimiento.to_row = from_row - 1;
-                        movimiento.to_col = from_col - 1;
-                    }
-                }
-                if (from_row - 1 === 8) {
-                    movimiento.value = 50;
-                    movimiento.from_row = from_row;
-                    movimiento.from_col = from_col;
-                    movimiento.to_row = from_row - 1;
-                    movimiento.to_col = from_col;
-                }
-
-                movimiento.value = valueMovimiento.P;
-                movimiento.from_row = from_row;
-                movimiento.from_col = from_col;
-                movimiento.to_row = from_row - 1;
-                movimiento.to_col = from_col;
-
+const whitePawnMovement = async (board) => {
+    for (let row = 13; row > 8; row--) {
+        for (let col = 0; col < 16; col++) {
+            if (board[row][col] === 'P') {
+                whitePawnAtack(board, row, col);
             }
-            return movimiento;
         }
-
     }
 }
 
-
-const whiteQueenMovement = (board) => {
+const whiteQueenMovement = async (board) => {
     for (let row = 15; row > 0; row--) {
         for (let col = 0; col < 16; col++) {
-            if (board[row][col] === 'Q') {
-                queenAtack(board, row, col);
+            if ('KQRB'.includes(board[row][col])) {
+                whiteQueenAtack(board, row, col);
             }
         }
     }
 }
 
-const queenAtack = (board, from_row, from_col) => {
+const whitePawnAtack = async (board, row, col) => {
+
+    if (board[row - 1][col] === ' ') {
+        if (board[row - 2][col] === ' ') {
+            if (row === 12 || row === 13) {
+                let nuevoMovimiento = {
+                    value: 35,
+                    from_row: row,
+                    from_col: col,
+                    to_row: row - 2,
+                    to_col: col,
+                    valueMovimiento: valueMovimiento.P
+                }
+                whiteMovementsArray.push(nuevoMovimiento)
+            }
+        }
+        if (blacks.includes(board[row - 1][col + 1])) {
+            let nuevoMovimiento = {
+
+                value: value[board[row - 1][col + 1]],
+                from_row: row,
+                from_col: col,
+                to_row: row - 1,
+                to_col: col + 1,
+                valueMovimiento: valueMovimiento.P
+
+            }
+            whiteMovementsArray.push(nuevoMovimiento)
+        }
+        if (blacks.includes(board[row - 1][col - 1])) {
+            let nuevoMovimiento = {
+
+                value: value[board[row - 1][col - 1]],
+                from_row: row,
+                from_col: col,
+                to_row: row - 1,
+                to_col: col - 1,
+                valueMovimiento: valueMovimiento.P
+            }
+            whiteMovementsArray.push(nuevoMovimiento)
+        }
+        if (row - 1 === 8) {
+            let nuevoMovimiento = {
+                value: 50,
+                from_row: row,
+                from_col: col,
+                to_row: row - 1,
+                to_col: col,
+                valueMovimiento: valueMovimiento.P
+            }
+            whiteMovementsArray.push(nuevoMovimiento)
+        }
+        let nuevoMovimiento = {
+
+            value: valueMovimiento.P,
+            from_row: row,
+            from_col: col,
+            to_row: row - 1,
+            to_col: col,
+            valueMovimiento: valueMovimiento.P
+        }
+        whiteMovementsArray.push(nuevoMovimiento)
+    }
+}
+
+
+const whiteQueenAtack = (board, from_row, from_col) => {
 
     // MOVIMIENTO VERTICAL HACIA LA BASE NEGRA
-    for (let row = from_row - 1; row > 0; row--) {
-        if (blacks.includes(board[row][from_col])) {
-            if (board[row - 1][from_col + 1 || from_col - 1] === 'p') {
-                continue;
-            }
+    if ('QR'.includes(board[from_row][from_col])) {
+        for (let row = from_row - 1; row >= 0; row--) {
 
-            if (value[board[row][from_col]] > movimiento.value) {
-                movimiento.value = value[board[row][from_col]]
-                movimiento.from_row = from_row;
-                movimiento.from_col = from_col;
-                movimiento.to_row = row;
-                movimiento.to_col = from_col;
-                // continue;
+            if (whites.includes(board[row][from_col])) {
+                break;
             }
-
-        } else if (whites.includes(board[row][from_col])) {
-            break;
-        }
-        break
-    }
-    // MOVIMIENTO VERTICAL HACIA LA BASE BLANCA
-    for (let row = from_row + 1; row < 16; row++) {
-        if (blacks.includes(board[row][from_col])) {
-            if (board[row - 1][from_col + 1 || from_col - 1] === 'p') {
-                continue;
+            if (blacks.includes(board[row][from_col])) {
+                let nuevoMovimiento = {
+                    value: value[board[row][from_col]],
+                    from_row: from_row,
+                    from_col: from_col,
+                    to_row: row,
+                    to_col: from_col,
+                    valueMovimiento: valueMovimiento[board[from_row][from_col]]
+                }
+                whiteMovementsArray.push(nuevoMovimiento)
+                break;
             }
-            if (value[board[row][from_col]] > movimiento.value) {
-                movimiento.value = value[board[row][from_col]]
-                movimiento.from_row = from_row;
-                movimiento.from_col = from_col;
-                movimiento.to_row = row;
-                movimiento.to_col = from_col;
-                continue;
-            }
-        } else if (whites.includes(board[row][from_col])) {
-            continue;
-        }
-    }
-    // MOVIMIENTO HORIZONTAL HACIA LA IZQUIERDA
-    for (let col = from_col - 1; col > 0; col--) {
-        if (blacks.includes(board[from_row][col])) {
-            if (board[from_row - 1][col + 1 || col - 1] === 'p') {
-                continue;
-            }
-            if (value[board[from_row][col]] > movimiento.value) {
-                movimiento.value = value[board[from_row][col]]
-                movimiento.from_row = from_row;
-                movimiento.from_col = from_col;
-                movimiento.to_row = from_row;
-                movimiento.to_col = col;
-                continue;
-            }
-        } else if (whites.includes(board[from_row][col])) {
-            break;
-        }
-        break;
-    }
-    // MOVIMIENTO HORIZONTAL HACIA LA DERECHA
-    for (let col = from_col + 1; col < 16; col++) {
-        if (blacks.includes(board[from_row][col])) {
-            if (board[from_row - 1][col + 1 || col - 1] === 'p') {
-                continue;
-            }
-            if (value[board[from_row][col]] > movimiento.value) {
-                movimiento.value = value[board[from_row][col]]
-                movimiento.from_row = from_row;
-                movimiento.from_col = from_col;
-                movimiento.to_row = from_row;
-                movimiento.to_col = col;
-                continue;
-            }
-        } else if (whites.includes(board[from_row][col])) {
-            break;
-        }
-    }
-    // MOVIMIENTO DIAGONAL 1 CASILLERO ADELANTE A LA IZQUIERDA
-    if ('kqr'.includes(board[from_row - 1][from_col - 1])) {
-
-        if (value[board[from_row - 1][from_col - 1]] > movimiento.value) {
-            movimiento.value = value[board[from_row - 1][from_col - 1]]
-            movimiento.from_row = from_row;
-            movimiento.from_col = from_col;
-            movimiento.to_row = from_row - 1;
-            movimiento.to_col = from_col - 1;
         }
 
-    }
+        // MOVIMIENTO VERTICAL HACIA LA BASE BLANCA
 
-    let diagonalDerecha = from_row > from_col ? 15 - from_col : 15 - from_row
-    // MOVIMIENTO DIAGONAL 1 CASILLERO ADELANTE A LA DERECHA
-    for (let x = 1; x < diagonalDerecha; x++) {
+        for (let row = from_row + 1; row < 16; row++) {
 
+            if (whites.includes(board[row][from_col])) {
+                break;
+            }
 
-    }
-    if ('kqr'.includes(board[from_row - 1][from_col + 1])) {
+            if (blacks.includes(board[row][from_col])) {
+                let nuevoMovimiento = {
 
-        if (value[board[from_row - 1][from_col + 1]] > movimiento.value) {
-            movimiento.value = value[board[from_row - 1][from_col + 1]]
-            movimiento.from_row = from_row;
-            movimiento.from_col = from_col;
-            movimiento.to_row = from_row - 1;
-            movimiento.to_col = from_col + 1;
+                    value: value[board[row][from_col]],
+                    from_row: from_row,
+                    from_col: from_col,
+                    to_row: row,
+                    to_col: from_col,
+                    valueMovimiento: valueMovimiento[board[from_row][from_col]]
+                }
+                whiteMovementsArray.push(nuevoMovimiento)
+                break;
+            }
+
         }
 
+        // MOVIMIENTO HORIZONTAL HACIA LA IZQUIERDA
+
+        for (let col = from_col - 1; col > 0; col--) {
+            if (whites.includes(board[from_row][col])) {
+                break;
+            }
+            if (blacks.includes(board[from_row][col])) {
+                let nuevoMovimiento = {
+                    value: value[board[from_row][col]],
+                    from_row: from_row,
+                    from_col: from_col,
+                    to_row: from_row,
+                    to_col: col,
+                    valueMovimiento: valueMovimiento[board[from_row][from_col]]
+                }
+                whiteMovementsArray.push(nuevoMovimiento)
+                break;
+            }
+        }
+
+        // MOVIMIENTO HORIZONTAL HACIA LA DERECHA
+
+        for (let col = from_col + 1; col < 16; col++) {
+            if (whites.includes(board[from_row][col])) {
+                break;
+            }
+            if (blacks.includes(board[from_row][col])) {
+                let nuevoMovimiento = {
+                    value: value[board[from_row][col]],
+                    from_row: from_row,
+                    from_col: from_col,
+                    to_row: from_row,
+                    to_col: col,
+                    valueMovimiento: valueMovimiento[board[from_row][from_col]]
+                }
+                whiteMovementsArray.push(nuevoMovimiento)
+                break;
+            }
+
+        }
     }
     // MOVIMIENTO DIAGONAL ADELANTE A LA DERECHA
-    for (let x = 1; x < 16; x++) {
+    if ('QB'.includes(board[from_row][from_col])) {
 
-        if ('KQRBH'.includes(board[from_row + x][from_col + x])) {
+        for (let x = 1; x < from_row; x++) {
 
-            if (from_col + x === 16) break;
-
-            if (value[board[from_row + x][from_col + x]] > movimiento.value) {
-                movimiento.value = value[board[from_row + x][from_col + x]]
-                movimiento.from_row = from_row;
-                movimiento.from_col = from_col;
-                movimiento.to_row = from_row + x;
-                movimiento.to_col = from_col + x;
+            if (whites.includes(board[from_row - x][from_col + x])) {
+                break;
             }
 
-        } else if (blacks.includes(board[from_row + x][from_col + x])) {
-            break;
+            if (from_col + x >= 16 || from_row - x <= -1) {
+                break
+            };
+
+            if (blacks.includes(board[from_row - x][from_col + x])) {
+
+                // if ((board[from_row - x - 1][from_col + x + 1 || from_col + x - 1] === 'p')) {
+                //     break;
+                // }
+
+                let nuevoMovimiento = {
+
+                    value: value[board[from_row - x][from_col + x]],
+                    from_row: from_row,
+                    from_col: from_col,
+                    to_row: from_row - x,
+                    to_col: from_col + x,
+                    valueMovimiento: valueMovimiento[board[from_row][from_col]]
+                }
+                whiteMovementsArray.push(nuevoMovimiento)
+                break;
+            }
         }
     }
 
     // MOVIMIENTO DIAGONAL ADELANTE A LA IZQUIERDA
-    for (let x = 1; x < 16; x++) {
+    if ('QB'.includes(board[from_row][from_col])) {
 
-        if ('KQRBH'.includes(board[from_row + x][from_col - x])) {
+        for (let y = 1; y < from_row; y++) {
 
-            if (from_col - x === -1) break;
-
-            if (value[board[from_row + x][from_col - x]] > movimiento.value) {
-                movimiento.value = value[board[from_row + x][from_col - x]]
-                movimiento.from_row = from_row;
-                movimiento.from_col = from_col;
-                movimiento.to_row = from_row + x;
-                movimiento.to_col = from_col - x;
+            if (whites.includes(board[from_row - y][from_col - y])) {
+                break;
             }
 
-        } else if (blacks.includes(board[from_row + x][from_col + x])) {
-            break;
+            if (from_col - y <= -1 || from_row - y <= -1) {
+                break
+            }
+
+            if (blacks.includes(board[from_row - y][from_col - y])) {
+
+                let nuevoMovimiento = {
+
+                    value: value[board[from_row - y][from_col - y]],
+                    from_row: from_row,
+                    from_col: from_col,
+                    to_row: from_row - y,
+                    to_col: from_col - y,
+                    valueMovimiento: valueMovimiento[board[from_row][from_col]],
+                }
+                whiteMovementsArray.push(nuevoMovimiento)
+                break;
+            }
         }
     }
-    return movimiento;
-}
 
-const matriz = ({ data }) => {
-    let board = data.board;
-    let index = 0;
-    let matriz = [];
+    // MOVIMIENTO DIAGONAL ATRAS A LA IZQUIERDA
+    if ('QB'.includes(board[from_row][from_col])) {
 
-    for (let i = 0; i < 16; i++) {
-        let row = [];
-        for (let j = 0; j < 16; j++) {
-            row.push(board[index])
-            index++
+        for (let x = 1; x < from_col; x++) {
+
+            if (from_col - x < 0 || from_row + x > 15) {
+                break
+            };
+
+            if (whites.includes(board[from_row + x][from_col - x])) {
+                break;
+            }
+
+            if (blacks.includes(board[from_row + x][from_col - x])) {
+
+                let nuevoMovimiento = {
+
+                    value: value[board[from_row + x][from_col - x]],
+                    from_row: from_row,
+                    from_col: from_col,
+                    to_row: from_row + x,
+                    to_col: from_col - x,
+                    valueMovimiento: valueMovimiento[board[from_row][from_col]]
+                }
+                whiteMovementsArray.push(nuevoMovimiento)
+                break;
+            }
         }
-        matriz.push(row)
     }
-    return matriz;
+
+    // MOVIMIENTO DIAGONAL ATRAS A LA DERECHA
+    if ('QB'.includes(board[from_row][from_col])) {
+
+        for (let y = 1; y < from_col; y++) {
+
+            if (from_col + y > 15 || from_row + y > 15) {
+                break
+            }
+
+            if (whites.includes(board[from_row + y][from_col + y])) {
+                break;
+            }
+
+            if (blacks.includes(board[from_row + y][from_col + y])) {
+
+                let nuevoMovimiento = {
+                    value: value[board[from_row + y][from_col + y]],
+                    from_row: from_row,
+                    from_col: from_col,
+                    to_row: from_row + y,
+                    to_col: from_col + y,
+                    valueMovimiento: valueMovimiento[board[from_row][from_col]]
+                }
+                whiteMovementsArray.push(nuevoMovimiento)
+                break;
+            }
+        }
+    }
+
+
+    // MOVIMIENTO DEL REY
+    if ('K'.includes(board[from_row][from_col])) {
+        for (let row = -1; row < 2; row++) {
+            for (let col = -1; col < 2; col++) {
+                if (from_row + row > 15 || from_col + col < 0 || from_col + col > 15) {
+                    continue;
+                }
+                if (whites.includes(board[from_row + row][from_col + col])) {
+                    continue;
+                }
+                if (blacks.includes(board[from_row + row][from_col + col])) {
+                    let nuevoMovimiento = {
+                        value: value[board[from_row + row][from_col + col]],
+                        from_row: from_row,
+                        from_col: from_col,
+                        to_row: from_row + row,
+                        to_col: from_col + col,
+                        valueMovimiento: valueMovimiento[board[from_row][from_col]]
+                    }
+                    whiteMovementsArray.push(nuevoMovimiento)
+                }
+
+            }
+        }
+    }
+    // return movimiento
 }
-
-
-
-
-
-// var pieces_strategy = {
-//     'p': moveBlackPawn,
-//     'P': moveWhitePawn,
-//     'r': moveRook, //moveRook,
-//     'R': moveRook, //moveRook,
-//     'k': null,
-//     'K': null,
-//     'h': null,
-//     'H': null,
-//     'b': null,
-//     'B': null,
-//     'q': moveQueen, //moveQueen,
-//     'Q': moveQueen, //moveQueen
-// };
-
-// function moveBlackPawn(from_row, from_col) {
-//     return { to_row: from_row + 1, to_col: from_col }
-//   }
-//   function moveWhitePawn(from_row, from_col) {
-//     return { to_row: from_row - 1, to_col: from_col }
-//   }
-
 
 module.exports = {
-    whiteMovements,
-    matriz
+    whiteMovements
 }

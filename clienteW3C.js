@@ -4,10 +4,10 @@ const W3CWebSocket = require('websocket').w3cwebsocket;
 
 const client = new W3CWebSocket(`wss://megachess.herokuapp.com/service?authtoken=${process.env.TOKEN}`);
 
-const connectedUsers = {
-    action: 'get_connected_users',
-    data: {}
-}
+// const connectedUsers = {
+//     action: 'get_connected_users',
+//     data: {}
+// }
 
 client.onerror = () => {
     console.log('Connection Error');
