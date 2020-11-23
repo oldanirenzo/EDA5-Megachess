@@ -15,7 +15,7 @@ const whiteMovements = (data) => {
 
         whitePiecesMovements(board)
             .then(() => {
-                let bestMovement = whiteMovementsArray.reduce((acum, actual) => acum.value > actual.value ? acum : actual)
+                let bestMovement = whiteMovementsArray.reduce((acum, actual) => acum.value >= actual.value ? acum : actual)
                 resolve({
                     action: 'move',
                     data: {
@@ -56,9 +56,9 @@ let valueMovimiento = {
 
 const whitePiecesMovements = async (board) => {
     return new Promise((resolve, reject) => {
-        whiteQueenMovement(board)
+        whitePawnMovement(board)
             .then(() => {
-                whitePawnMovement(board)
+                whiteQueenMovement(board)
                     .then(() => {
                         resolve()
                     })
@@ -92,19 +92,18 @@ const whitePawnAtack = async (board, row, col) => {
     if (board[row - 1][col] === ' ') {
         if (board[row - 2][col] === ' ') {
             if (row === 12 || row === 13) {
-                let nuevoMovimiento = {
+                whiteMovementsArray.push({
                     value: 35,
                     from_row: row,
                     from_col: col,
                     to_row: row - 2,
                     to_col: col,
                     valueMovimiento: valueMovimiento.P
-                }
-                whiteMovementsArray.push(nuevoMovimiento)
+                })
             }
         }
         if (blacks.includes(board[row - 1][col + 1])) {
-            let nuevoMovimiento = {
+            whiteMovementsArray.push({
 
                 value: value[board[row - 1][col + 1]],
                 from_row: row,
@@ -113,11 +112,10 @@ const whitePawnAtack = async (board, row, col) => {
                 to_col: col + 1,
                 valueMovimiento: valueMovimiento.P
 
-            }
-            whiteMovementsArray.push(nuevoMovimiento)
+            })
         }
         if (blacks.includes(board[row - 1][col - 1])) {
-            let nuevoMovimiento = {
+            whiteMovementsArray.push({
 
                 value: value[board[row - 1][col - 1]],
                 from_row: row,
@@ -125,21 +123,19 @@ const whitePawnAtack = async (board, row, col) => {
                 to_row: row - 1,
                 to_col: col - 1,
                 valueMovimiento: valueMovimiento.P
-            }
-            whiteMovementsArray.push(nuevoMovimiento)
+            })
         }
         if (row - 1 === 8) {
-            let nuevoMovimiento = {
+            whiteMovementsArray.push({
                 value: 50,
                 from_row: row,
                 from_col: col,
                 to_row: row - 1,
                 to_col: col,
                 valueMovimiento: valueMovimiento.P
-            }
-            whiteMovementsArray.push(nuevoMovimiento)
+            })
         }
-        let nuevoMovimiento = {
+        whiteMovementsArray.push({
 
             value: valueMovimiento.P,
             from_row: row,
@@ -147,8 +143,7 @@ const whitePawnAtack = async (board, row, col) => {
             to_row: row - 1,
             to_col: col,
             valueMovimiento: valueMovimiento.P
-        }
-        whiteMovementsArray.push(nuevoMovimiento)
+        })
     }
 }
 
@@ -163,15 +158,14 @@ const whiteQueenAtack = (board, from_row, from_col) => {
                 break;
             }
             if (blacks.includes(board[row][from_col])) {
-                let nuevoMovimiento = {
+                whiteMovementsArray.push({
                     value: value[board[row][from_col]],
                     from_row: from_row,
                     from_col: from_col,
                     to_row: row,
                     to_col: from_col,
                     valueMovimiento: valueMovimiento[board[from_row][from_col]]
-                }
-                whiteMovementsArray.push(nuevoMovimiento)
+                })
                 break;
             }
         }
@@ -185,7 +179,7 @@ const whiteQueenAtack = (board, from_row, from_col) => {
             }
 
             if (blacks.includes(board[row][from_col])) {
-                let nuevoMovimiento = {
+                whiteMovementsArray.push({
 
                     value: value[board[row][from_col]],
                     from_row: from_row,
@@ -193,8 +187,7 @@ const whiteQueenAtack = (board, from_row, from_col) => {
                     to_row: row,
                     to_col: from_col,
                     valueMovimiento: valueMovimiento[board[from_row][from_col]]
-                }
-                whiteMovementsArray.push(nuevoMovimiento)
+                })
                 break;
             }
 
@@ -207,15 +200,14 @@ const whiteQueenAtack = (board, from_row, from_col) => {
                 break;
             }
             if (blacks.includes(board[from_row][col])) {
-                let nuevoMovimiento = {
+                whiteMovementsArray.push({
                     value: value[board[from_row][col]],
                     from_row: from_row,
                     from_col: from_col,
                     to_row: from_row,
                     to_col: col,
                     valueMovimiento: valueMovimiento[board[from_row][from_col]]
-                }
-                whiteMovementsArray.push(nuevoMovimiento)
+                })
                 break;
             }
         }
@@ -227,15 +219,14 @@ const whiteQueenAtack = (board, from_row, from_col) => {
                 break;
             }
             if (blacks.includes(board[from_row][col])) {
-                let nuevoMovimiento = {
+                whiteMovementsArray.push({
                     value: value[board[from_row][col]],
                     from_row: from_row,
                     from_col: from_col,
                     to_row: from_row,
                     to_col: col,
                     valueMovimiento: valueMovimiento[board[from_row][from_col]]
-                }
-                whiteMovementsArray.push(nuevoMovimiento)
+                })
                 break;
             }
 
@@ -260,7 +251,7 @@ const whiteQueenAtack = (board, from_row, from_col) => {
                 //     break;
                 // }
 
-                let nuevoMovimiento = {
+                whiteMovementsArray.push({
 
                     value: value[board[from_row - x][from_col + x]],
                     from_row: from_row,
@@ -268,8 +259,7 @@ const whiteQueenAtack = (board, from_row, from_col) => {
                     to_row: from_row - x,
                     to_col: from_col + x,
                     valueMovimiento: valueMovimiento[board[from_row][from_col]]
-                }
-                whiteMovementsArray.push(nuevoMovimiento)
+                })
                 break;
             }
         }
@@ -290,7 +280,7 @@ const whiteQueenAtack = (board, from_row, from_col) => {
 
             if (blacks.includes(board[from_row - y][from_col - y])) {
 
-                let nuevoMovimiento = {
+                whiteMovementsArray.push({
 
                     value: value[board[from_row - y][from_col - y]],
                     from_row: from_row,
@@ -298,8 +288,7 @@ const whiteQueenAtack = (board, from_row, from_col) => {
                     to_row: from_row - y,
                     to_col: from_col - y,
                     valueMovimiento: valueMovimiento[board[from_row][from_col]],
-                }
-                whiteMovementsArray.push(nuevoMovimiento)
+                })
                 break;
             }
         }
@@ -320,7 +309,7 @@ const whiteQueenAtack = (board, from_row, from_col) => {
 
             if (blacks.includes(board[from_row + x][from_col - x])) {
 
-                let nuevoMovimiento = {
+                whiteMovementsArray.push({
 
                     value: value[board[from_row + x][from_col - x]],
                     from_row: from_row,
@@ -328,8 +317,7 @@ const whiteQueenAtack = (board, from_row, from_col) => {
                     to_row: from_row + x,
                     to_col: from_col - x,
                     valueMovimiento: valueMovimiento[board[from_row][from_col]]
-                }
-                whiteMovementsArray.push(nuevoMovimiento)
+                })
                 break;
             }
         }
@@ -350,15 +338,14 @@ const whiteQueenAtack = (board, from_row, from_col) => {
 
             if (blacks.includes(board[from_row + y][from_col + y])) {
 
-                let nuevoMovimiento = {
+                whiteMovementsArray.push({
                     value: value[board[from_row + y][from_col + y]],
                     from_row: from_row,
                     from_col: from_col,
                     to_row: from_row + y,
                     to_col: from_col + y,
                     valueMovimiento: valueMovimiento[board[from_row][from_col]]
-                }
-                whiteMovementsArray.push(nuevoMovimiento)
+                })
                 break;
             }
         }
@@ -376,15 +363,14 @@ const whiteQueenAtack = (board, from_row, from_col) => {
                     continue;
                 }
                 if (blacks.includes(board[from_row + row][from_col + col])) {
-                    let nuevoMovimiento = {
+                    whiteMovementsArray.push({
                         value: value[board[from_row + row][from_col + col]],
                         from_row: from_row,
                         from_col: from_col,
                         to_row: from_row + row,
                         to_col: from_col + col,
                         valueMovimiento: valueMovimiento[board[from_row][from_col]]
-                    }
-                    whiteMovementsArray.push(nuevoMovimiento)
+                    })
                 }
 
             }

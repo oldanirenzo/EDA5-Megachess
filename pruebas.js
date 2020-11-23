@@ -1,6 +1,5 @@
 const matriz = require("./movements/matriz");
 const decideAction = require("./movements/options");
-const { whiteMovements } = require("./movements/white");
 
 
 const negras = 'phbrqk';
