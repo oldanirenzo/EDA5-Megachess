@@ -14,7 +14,7 @@ const blackMovements = (data) => {
 
         blackPiecesMovements(board)
             .then(() => {
-                let bestMovement = blackMovementsArray.reduce((acum, actual) => acum.value > actual.value && acum.valuePiece < actual.valuePiece ? acum : actual)
+                let bestMovement = blackMovementsArray.reduce((acum, current) => acum.value > current.value  ? acum : current)
                 resolve({
                     action: 'move',
                     data: {

@@ -17,7 +17,7 @@ const whiteMovements = (data) => {
             .then(() => {
                 // console.log('Movimientos Array: ', whiteMovementsArray)
                 console.log('Movimientos encontrados: ' + whiteMovementsArray.length)
-                let bestMovement = whiteMovementsArray.reduce((acum, actual) => acum.value >= actual.value ? acum : actual)
+                let bestMovement = whiteMovementsArray.reduce((acum, current) => acum.value >= current.value ? acum : current)
                 console.log('BestMovement blancasConSwitch: ', bestMovement)
                 resolve({
                     action: 'move',
@@ -95,7 +95,7 @@ const whitePiecesMovements = async (board) => {
     }
 }
 
-
+//FUNCIONES DE MOVIMIENTO
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 const horizontalMovement = async (board, from_row, from_col) => {
     // MOVIMIENTO HORIZONTAL HACIA LA IZQUIERDA
@@ -131,15 +131,15 @@ const horizontalMovement = async (board, from_row, from_col) => {
 
     for (let col = from_col + 1; col < 16; col++) {
         if (whites.includes(board[from_row][col])) {
-                if (col - 1 !== from_col) {
-                    whiteMovementsArray.push({
-                        value: valuePiece[board[from_row][from_col]],
-                        from_row: from_row,
-                        from_col: from_col,
-                        to_row: from_row,
-                        to_col: col - 1,
-                        // valuePiece: valuePiece[board[from_row][from_col]]
-                    })
+            if (col - 1 !== from_col) {
+                whiteMovementsArray.push({
+                    value: valuePiece[board[from_row][from_col]],
+                    from_row: from_row,
+                    from_col: from_col,
+                    to_row: from_row,
+                    to_col: col - 1,
+                    // valuePiece: valuePiece[board[from_row][from_col]]
+                })
             }
             break;
         }
@@ -537,8 +537,6 @@ const pawnMovement = async (board, from_row, from_col) => {
         })
     }
 }
-
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 module.exports = {
     whiteMovements

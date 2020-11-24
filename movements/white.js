@@ -16,7 +16,7 @@ const whiteMovements = (data) => {
         whitePiecesMovements(board)
             .then(() => {
                 // console.log('Movimientos: ' + whiteMovementsArray.length)
-                let bestMovement = whiteMovementsArray.reduce((acum, actual) => acum.value >= actual.value ? acum : actual)
+                let bestMovement = whiteMovementsArray.reduce((acum, current) => acum.value >= current.value ? acum : current)
                 // console.log('BestMovement white: ', bestMovement)
 
                 resolve({
@@ -49,8 +49,8 @@ let value = {
 }
 
 let valuePiece = {
-    P: 10,
-    H: 30,
+    P: 30,
+    H: 10,
     B: 40,
     R: 60,
     Q: 70,
