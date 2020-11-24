@@ -1,6 +1,7 @@
 const acceptChallenge = require("../challenge/acceptChallenge")
 const { blackMovements } = require("./black")
-const { whiteMovements } = require("./white")
+// const { whiteMovements } = require("./white")
+const { whiteMovements } = require("../blancasConSwitch")
 
 const decideAction = (data) => {
     return new Promise((resolve, reject) => {
