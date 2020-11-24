@@ -487,7 +487,7 @@ const pawnMovement = async (board, from_row, from_col) => {
         if (board[from_row - 2][from_col] === ' ') {
             if (from_row === 12 || from_row === 13) {
                 whiteMovementsArray.push({
-                    value: 50,
+                    value: 60,
                     from_row: from_row,
                     from_col: from_col,
                     to_row: from_row - 2,
@@ -518,7 +518,7 @@ const pawnMovement = async (board, from_row, from_col) => {
         }
         if (from_row - 1 === 8) {
             whiteMovementsArray.push({
-                value: 70,
+                value: 500,
                 from_row: from_row,
                 from_col: from_col,
                 to_row: from_row - 1,
@@ -528,7 +528,7 @@ const pawnMovement = async (board, from_row, from_col) => {
         }
         whiteMovementsArray.push({
 
-            value: 40,
+            value: 50,
             from_row: from_row,
             from_col: from_col,
             to_row: from_row - 1,
