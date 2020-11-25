@@ -1,5 +1,4 @@
 const { whiteMovements } = require("../blancasConSwitch");
-const matriz = require("../movements/matriz");
 
 let data = {
     event: 'your_turn',
@@ -9,24 +8,13 @@ let data = {
         username: 'oldanirenzo',
         actual_turn: 'white',
         board: 'rrhhbbqqkkbbhhrrrrhhbbqqkkbbhhrrpppppppppppppppppppppppppppppppp                                                                                                                                PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPRRHHBBQQKKBBHHRRRRHHBBQQKKBBHHRR',
-        move_left: 8,
+        move_left: 199,
         opponent_username: 'oldanirenzo'
     }
 }
 
 
-describe('Matriz', () => {
-    test('Debe devolver una matriz llena al mandar los datos del servidor', () => {
 
-        for (let row = 0; row < 16; row++) {
-            for (let col = 0; col < 16; col++) {
-
-                expect(matriz(data)[row][col])
-                    .toBeDefined()
-            }
-        }
-    });
-});
 
 describe('Piezas blancas, movimientos.', () => {
     test('Debe mover el peon 2 posiciones hacia adelante', () => {
