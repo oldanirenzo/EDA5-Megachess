@@ -1,7 +1,8 @@
 const acceptChallenge = require("../challenge/acceptChallenge")
-const { blackMovements } = require("./black")
+// const { blackMovements } = require("./black")
+const { blackMovements } = require("./negrasConSwitch")
 // const { whiteMovements } = require("./white")
-const { whiteMovements } = require("../blancasConSwitch")
+const { whiteMovements } = require("./blancasConSwitch")
 
 const decideAction = (data) => {
     return new Promise((resolve, reject) => {
@@ -42,7 +43,7 @@ const decideAction = (data) => {
                 console.log(data)
                 break;
             default:
-                return (' ')
+                break;
         }
     })
 
