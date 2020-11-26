@@ -14,7 +14,7 @@ const blackMovements = (data) => {
 
         blackPiecesMovements(board)
             .then(() => {
-                let bestMovement = blackMovementsArray.reduce((acum, current) => acum.value > current.value  ? acum : current)
+                // let bestMovement = blackMovementsArray.reduce((acum, current) => acum.value >= current.value ? acum : current)
                 resolve({
                     action: 'move',
                     data: {
@@ -49,7 +49,7 @@ let valuePiece = {
     h: 30,
     b: 40,
     r: 60,
-    q: 70,
+    q: 5,
     k: 100,
 }
 
@@ -70,7 +70,7 @@ const blackPiecesMovements = async (board) => {
 
 const blackPawnMovement = async (board) => {
     for (let row = 2; row < 8; row++) {
-        for (let col = 0; col < 16; col++) {
+        for (let col = 0; col < board.length; col++) {
             if (board[row][col] === 'p') {
                 await blackPawnAtack(board, row, col);
             }
@@ -80,7 +80,7 @@ const blackPawnMovement = async (board) => {
 
 const blackQueenMovement = async (board) => {
     for (let row = 15; row > 0; row--) {
-        for (let col = 0; col < 16; col++) {
+        for (let col = 0; col < board.length; col++) {
             if ('kqrbh'.includes(board[row][col])) {
                 await blackQueenAtack(board, row, col);
             }
@@ -92,30 +92,26 @@ const blackPawnAtack = async (board, row, col) => {
 
     if (board[row + 1][col] === ' ') {
         if (board[row + 2][col] === ' ') {
-            if (row === (2 || 3)) {
+            if (row === 2 || row === 3) {
                 blackMovementsArray.push({
-                    value: 35,
+                    value: 10,
                     from_row: row,
                     from_col: col,
                     to_row: row + 2,
                     to_col: col,
                     valuePiece: valuePiece.p
-                }
-                )
+                })
             }
         }
         if (whites.includes(board[row + 1][col + 1])) {
             blackMovementsArray.push({
-
                 value: value[board[row + 1][col + 1]],
                 from_row: row,
                 from_col: col,
                 to_row: row + 1,
                 to_col: col + 1,
                 valuePiece: valuePiece.p
-
-            }
-            )
+            })
         }
         if (whites.includes(board[row + 1][col - 1])) {
             blackMovementsArray.push({
@@ -126,22 +122,19 @@ const blackPawnAtack = async (board, row, col) => {
                 to_row: row + 1,
                 to_col: col - 1,
                 valuePiece: valuePiece.p
-            }
-            )
+            })
         }
         if (row + 1 === 7) {
             blackMovementsArray.push({
-                value: 50,
+                value: 500,
                 from_row: row,
                 from_col: col,
                 to_row: row + 1,
                 to_col: col,
                 valuePiece: valuePiece.p
-            }
-            )
+            })
         }
         blackMovementsArray.push({
-
             value: valuePiece.p,
             from_row: row,
             from_col: col,
@@ -377,6 +370,16 @@ const blackQueenAtack = (board, from_row, from_col) => {
                         valuePiece: valuePiece[board[from_row][from_col]]
                     })
                 }
+                if (' '.includes(board[from_row + row][from_col + col])) {
+                whiteMovementsArray.push({
+                    value: valuePiece.k,
+                    from_row: from_row,
+                    from_col: from_col,
+                    to_row: from_row + row,
+                    to_col: from_col + col,
+                    // valuePiece: valuePiece[board[from_row][from_col]]
+                })
+            }
 
             }
         }
