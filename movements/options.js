@@ -12,12 +12,12 @@ const decideAction = (data) => {
 
                 acceptChallenge(data)
                     .then(challenge => {
-                        resolve(challenge)
+                        // resolve(challenge)
                     })
                     .catch(err => reject(err))
                 break;
-            case 'your_turn':
 
+            case 'your_turn':
                 if (data.data.actual_turn === 'white') {
                     (whiteMovements(data))
                         .then(movement => {
