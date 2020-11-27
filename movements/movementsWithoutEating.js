@@ -1,7 +1,7 @@
 
 
 
-const randomMovements = async (board) => {
+const randomMovements = (board) => {
     for (let row = 0; row < board.length; row++) {
         for (let col = 0; col < board.length; col++) {
             switch (board[row][col]) {
@@ -62,4 +62,4 @@ const randomMovements = async (board) => {
     }
 }
 
-module.exports = {randomMovements}
+module.exports = { randomMovements }

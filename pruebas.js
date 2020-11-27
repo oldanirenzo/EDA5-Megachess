@@ -28,7 +28,7 @@ let data = {
 //     .catch(err => reject(err))
 
 
-// console.log(matriz(data)[0][15])
+// console.table(matriz(data))
 // console.log(matriz(data)[14][15])
 // let action = decideAction(data);
 

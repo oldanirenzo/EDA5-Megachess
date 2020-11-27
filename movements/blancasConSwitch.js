@@ -13,6 +13,7 @@ const whiteMovements = (data) => {
         let board_id = data.data.board_id;
         let turn_token = data.data.turn_token;
         let board = matriz(data)
+        // console.table(board);
 
         whitePiecesMovements(board)
             .then(() => {
@@ -33,11 +34,11 @@ const whiteMovements = (data) => {
                 }
 
                 let whiteBestMovement = whiteMovementsArray.reduce((acum, current) => {
-                    if (current.value === 50 & current.to_row > 11) {
-                        return current
-                    } else if (acum.value === 50 & acum.to_row > 11) {
-                        return acum
-                    }
+                    // if (current.value === 700 & current.to_row > 7) {
+                    //     return current
+                    // } else if (acum.value === 700 & acum.to_row > 7) {
+                    //     return acum
+                    // }
 
                     if (acum.value >= current.value) {
                         return acum
@@ -70,7 +71,7 @@ let value = {
     h: 300,
     b: 400,
     r: 600,
-    q: 50,
+    q: 700,
     k: 1000,
 }
 
@@ -91,33 +92,33 @@ const whitePiecesMovements = async (board) => {
 
                 case 'P':
                     await pawnMovement(board, row, col);
-                    continue;
+                    break;
 
                 case 'H':
                     await horseMovement(board, row, col);
-                    continue;
+                    break;
 
                 case 'B':
                     await diagonalMovement(board, row, col);
-                    continue;
+                    break;
 
                 case 'R':
                     await horizontalMovement(board, row, col);
                     await verticalMovement(board, row, col);
-                    continue;
+                    break;
 
                 case 'Q':
                     await horizontalMovement(board, row, col);
                     await verticalMovement(board, row, col);
                     await diagonalMovement(board, row, col);
-                    continue;
+                    break;
 
                 case 'K':
                     await kingMovement(board, row, col);
-                    continue;
+                    break;
 
                 default:
-                    continue;
+                    break;
             }
         }
     }
@@ -130,16 +131,16 @@ const horizontalMovement = async (board, from_row, from_col) => {
 
     for (let col = from_col - 1; col > 0; col--) {
         if (whites.includes(board[from_row][col])) {
-            // if (col + 1 !== from_col) {
-            //     whiteMovementsArray.push({
-            //         value: valuePiece[board[from_row][from_col]],
-            //         from_row: from_row,
-            //         from_col: from_col,
-            //         to_row: from_row,
-            //         to_col: col + 1,
-            //         // valuePiece: valuePiece[board[from_row][from_col]]
-            //     })
-            // }
+            if (col + 1 !== from_col) {
+                whiteMovementsArray.push({
+                    value: valuePiece[board[from_row][from_col]],
+                    from_row: from_row,
+                    from_col: from_col,
+                    to_row: from_row,
+                    to_col: col + 1,
+                    // valuePiece: valuePiece[board[from_row][from_col]]
+                })
+            }
             break;
         }
         if (blacks.includes(board[from_row][col])) {
@@ -159,16 +160,16 @@ const horizontalMovement = async (board, from_row, from_col) => {
 
     for (let col = from_col + 1; col < 16; col++) {
         if (whites.includes(board[from_row][col])) {
-            // if (col - 1 !== from_col) {
-            //     whiteMovementsArray.push({
-            //         value: valuePiece[board[from_row][from_col]],
-            //         from_row: from_row,
-            //         from_col: from_col,
-            //         to_row: from_row,
-            //         to_col: col - 1,
-            //         // valuePiece: valuePiece[board[from_row][from_col]]
-            //     })
-            // }
+            if (col - 1 !== from_col) {
+                whiteMovementsArray.push({
+                    value: valuePiece[board[from_row][from_col]],
+                    from_row: from_row,
+                    from_col: from_col,
+                    to_row: from_row,
+                    to_col: col - 1,
+                    // valuePiece: valuePiece[board[from_row][from_col]]
+                })
+            }
             break;
         }
         if (blacks.includes(board[from_row][col])) {
@@ -192,16 +193,16 @@ const verticalMovement = async (board, from_row, from_col) => {
     for (let row = from_row - 1; row >= 0; row--) {
 
         if (whites.includes(board[row][from_col])) {
-            // if (row + 1 !== from_row) {
-            //     whiteMovementsArray.push({
-            //         value: valuePiece[board[from_row][from_col]],
-            //         from_row: from_row,
-            //         from_col: from_col,
-            //         to_row: row + 1,
-            //         to_col: from_col,
-            //         // valuePiece: valuePiece[board[from_row][from_col]]
-            //     })
-            // }
+            if (row + 1 !== from_row) {
+                whiteMovementsArray.push({
+                    value: valuePiece[board[from_row][from_col]],
+                    from_row: from_row,
+                    from_col: from_col,
+                    to_row: row + 1,
+                    to_col: from_col,
+                    // valuePiece: valuePiece[board[from_row][from_col]]
+                })
+            }
             break;
         }
         if (blacks.includes(board[row][from_col])) {
@@ -222,16 +223,16 @@ const verticalMovement = async (board, from_row, from_col) => {
     for (let row = from_row + 1; row < 16; row++) {
 
         if (whites.includes(board[row][from_col])) {
-            // if (row - 1 !== from_row) {
-            //     whiteMovementsArray.push({
-            //         value: valuePiece[board[from_row][from_col]],
-            //         from_row: from_row,
-            //         from_col: from_col,
-            //         to_row: row - 1,
-            //         to_col: from_col,
-            //         // valuePiece: valuePiece[board[from_row][from_col]]
-            //     })
-            // }
+            if (row - 1 !== from_row) {
+                whiteMovementsArray.push({
+                    value: valuePiece[board[from_row][from_col]],
+                    from_row: from_row,
+                    from_col: from_col,
+                    to_row: row - 1,
+                    to_col: from_col,
+                    // valuePiece: valuePiece[board[from_row][from_col]]
+                })
+            }
             break;
         }
 
@@ -263,24 +264,20 @@ const diagonalMovement = async (board, from_row, from_col) => {
         };
 
         if (whites.includes(board[from_row - x][from_col + x])) {
-            // if (x !== 1) {
-            //     whiteMovementsArray.push({
-            //         value: valuePiece[board[from_row][from_col]],
-            //         from_row: from_row,
-            //         from_col: from_col,
-            //         to_row: from_row - x + 1,
-            //         to_col: from_col + x - 1,
-            //         // valuePiece: valuePiece[board[from_row][from_col]]
-            //     })
-            // }
+            if (x !== 1) {
+                whiteMovementsArray.push({
+                    value: valuePiece[board[from_row][from_col]],
+                    from_row: from_row,
+                    from_col: from_col,
+                    to_row: from_row - x + 1,
+                    to_col: from_col + x - 1,
+                    // valuePiece: valuePiece[board[from_row][from_col]]
+                })
+            }
             break;
         }
 
         if (blacks.includes(board[from_row - x][from_col + x])) {
-
-            // if ((board[from_row - x - 1][from_col + x + 1 || from_col + x - 1] === 'p')) {
-            //     break;
-            // }
 
             whiteMovementsArray.push({
 
@@ -304,16 +301,16 @@ const diagonalMovement = async (board, from_row, from_col) => {
         }
 
         if (whites.includes(board[from_row - y][from_col - y])) {
-            // if (y !== 1) {
-            //     whiteMovementsArray.push({
-            //         value: valuePiece[board[from_row][from_col]],
-            //         from_row: from_row,
-            //         from_col: from_col,
-            //         to_row: from_row - y + 1,
-            //         to_col: from_col - y + 1,
-            //         // valuePiece: valuePiece[board[from_row][from_col]]
-            //     })
-            // }
+            if (y !== 1) {
+                whiteMovementsArray.push({
+                    value: valuePiece[board[from_row][from_col]],
+                    from_row: from_row,
+                    from_col: from_col,
+                    to_row: from_row - y + 1,
+                    to_col: from_col - y + 1,
+                    // valuePiece: valuePiece[board[from_row][from_col]]
+                })
+            }
             break;
         }
 
@@ -341,16 +338,16 @@ const diagonalMovement = async (board, from_row, from_col) => {
         };
 
         if (whites.includes(board[from_row + x][from_col - x])) {
-            // if (x !== 1) {
-            //     whiteMovementsArray.push({
-            //         value: valuePiece[board[from_row][from_col]],
-            //         from_row: from_row,
-            //         from_col: from_col,
-            //         to_row: from_row + x - 1,
-            //         to_col: from_col - x + 1,
-            //         // valuePiece: valuePiece[board[from_row][from_col]]
-            //     })
-            // }
+            if (x !== 1) {
+                whiteMovementsArray.push({
+                    value: valuePiece[board[from_row][from_col]],
+                    from_row: from_row,
+                    from_col: from_col,
+                    to_row: from_row + x - 1,
+                    to_col: from_col - x + 1,
+                    // valuePiece: valuePiece[board[from_row][from_col]]
+                })
+            }
             break;
         }
 
@@ -380,16 +377,16 @@ const diagonalMovement = async (board, from_row, from_col) => {
         }
 
         if (whites.includes(board[from_row + y][from_col + y])) {
-            // if (y !== 1) {
-            //     whiteMovementsArray.push({
-            //         value: valuePiece[board[from_row][from_col]],
-            //         from_row: from_row,
-            //         from_col: from_col,
-            //         to_row: from_row + y - 1,
-            //         to_col: from_col + y - 1,
-            //         // valuePiece: valuePiece[board[from_row][from_col]]
-            //     })
-            // }
+            if (y !== 1) {
+                whiteMovementsArray.push({
+                    value: valuePiece[board[from_row][from_col]],
+                    from_row: from_row,
+                    from_col: from_col,
+                    to_row: from_row + y - 1,
+                    to_col: from_col + y - 1,
+                    // valuePiece: valuePiece[board[from_row][from_col]]
+                })
+            }
             break;
         }
 
@@ -454,16 +451,16 @@ const horseMovement = async (board, from_row, from_col) => {
             if (whites.includes(board[from_row + x][from_col + y])) {
                 break;
             }
-            // if (' '.includes(board[from_row + x][from_col + y])) {
-            //     whiteMovementsArray.push({
-            //         value: valuePiece.H,
-            //         from_row: from_row,
-            //         from_col: from_col,
-            //         to_row: from_row + x,
-            //         to_col: from_col + y,
-            //         // valuePiece: valuePiece[board[from_row][from_col]]
-            //     })
-            // }
+            if (' '.includes(board[from_row + x][from_col + y])) {
+                whiteMovementsArray.push({
+                    value: valuePiece.H,
+                    from_row: from_row,
+                    from_col: from_col,
+                    to_row: from_row + x,
+                    to_col: from_col + y,
+                    // valuePiece: valuePiece[board[from_row][from_col]]
+                })
+            }
             if (blacks.includes(board[from_row + x][from_col + y])) {
                 whiteMovementsArray.push({
                     value: value[board[from_row + x][from_col + y]] - valuePiece[board[from_row][from_col]],
@@ -487,16 +484,16 @@ const horseMovement = async (board, from_row, from_col) => {
             if (whites.includes(board[from_row + x][from_col + y])) {
                 break;
             }
-            // if (' '.includes(board[from_row + x][from_col + y])) {
-            //     whiteMovementsArray.push({
-            //         value: valuePiece.H,
-            //         from_row: from_row,
-            //         from_col: from_col,
-            //         to_row: from_row + x,
-            //         to_col: from_col + y,
-            //         // valuePiece: valuePiece[board[from_row][from_col]]
-            //     })
-            // }
+            if (' '.includes(board[from_row + x][from_col + y])) {
+                whiteMovementsArray.push({
+                    value: valuePiece.H,
+                    from_row: from_row,
+                    from_col: from_col,
+                    to_row: from_row + x,
+                    to_col: from_col + y,
+                    // valuePiece: valuePiece[board[from_row][from_col]]
+                })
+            }
             if (blacks.includes(board[from_row + x][from_col + y])) {
                 whiteMovementsArray.push({
                     value: value[board[from_row + x][from_col + y]],
@@ -516,6 +513,16 @@ const pawnMovement = async (board, from_row, from_col) => {
     if (board[from_row - 1][from_col] === ' ') {
         if (board[from_row - 2][from_col] === ' ') {
             if (from_row === 12 || from_row === 13) {
+                if (from_col > 12) {
+                    whiteMovementsArray.push({
+                        value: 150,
+                        from_row: from_row,
+                        from_col: from_col,
+                        to_row: from_row - 2,
+                        to_col: from_col,
+                        // valuePiece: valuePiece.P
+                    })
+                }
                 whiteMovementsArray.push({
                     value: 10,
                     from_row: from_row,
@@ -556,8 +563,17 @@ const pawnMovement = async (board, from_row, from_col) => {
                 // valuePiece: valuePiece.P
             })
         }
+        if (from_col > 12) {
+            whiteMovementsArray.push({
+                value: 150,
+                from_row: from_row,
+                from_col: from_col,
+                to_row: from_row - 1,
+                to_col: from_col,
+                // valuePiece: valuePiece.P
+            })
+        }
         whiteMovementsArray.push({
-
             value: 10,
             from_row: from_row,
             from_col: from_col,
