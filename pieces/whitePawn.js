@@ -55,4 +55,5 @@ const whitePawn = async (board, from_row, from_col, enemyColor, eatPiece) => {
     }
     return pawnMovements;
 }
+
 module.exports = whitePawn;
