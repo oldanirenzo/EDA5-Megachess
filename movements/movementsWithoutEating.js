@@ -19,7 +19,7 @@ const randomMovements = (board) => {
                             from_row: row,
                             from_col: col,
                             to_row: row - 1,
-                            to_col: col - 1,
+                            to_col: col,
                         })
                     }
                 case ('h' || 'H'):
