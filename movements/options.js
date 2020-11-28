@@ -43,6 +43,7 @@ const decideAction = (data) => {
                 console.log(data)
                 break;
             default:
+                console.log('No se encontro la opción.')
                 break;
         }
     })
