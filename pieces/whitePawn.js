@@ -36,7 +36,7 @@ const whitePawn = async (board, from_row, from_col, enemyColor, eatPiece) => {
         }
         if (from_row - 1 === 8) {
             pawnMovements.push({
-                value: 500,
+                value: 200,
                 from_row: from_row,
                 from_col: from_col,
                 to_row: from_row - 1,
