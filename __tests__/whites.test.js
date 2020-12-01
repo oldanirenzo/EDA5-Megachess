@@ -1,4 +1,4 @@
-const { whiteMovements } = require("../movements/blancasConSwitch");
+const { whiteMovements } = require("../movements/white");
 
 let data = {
     event: 'your_turn',

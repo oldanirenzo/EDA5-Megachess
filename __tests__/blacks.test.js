@@ -1,4 +1,4 @@
-const { blackMovements } = require("../movements/negrasConSwitch");
+const { blackMovements } = require("../movements/black");
 
 
 let data = {
