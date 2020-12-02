@@ -5,7 +5,7 @@ const horse = async (board, from_row, from_col, sameColor, eatPiece, movePiece) 
     // 2 HACIA LOS LADOS Y 1 HACIA ARRIBA Y ABAJO
     for (let x = -2; x < 3; x += 4) {
         for (let y = -1; y < 2; y += 2) {
-            if ((from_row + x || from_col + y) < 0 || (from_row + x || from_col + y) > 15) {
+            if (from_row + x < 0 || from_col + y < 0 || from_row + x > 15 || from_col + y > 15) {
                 continue;
             }
             if (sameColor.includes(board[from_row + x][from_col + y])) {
@@ -34,7 +34,7 @@ const horse = async (board, from_row, from_col, sameColor, eatPiece, movePiece) 
     // 1 HACIA LOS LADOS Y 2 HACIA ARRIBA Y ABAJO
     for (let x = -1; x < 2; x += 2) {
         for (let y = -2; y < 3; y += 4) {
-            if ((from_row + x || from_col + y) < 0 || (from_row + x || from_col + y) > 15) {
+            if (from_row + x < 0 || from_col + y < 0 || from_row + x > 15 || from_col + y > 15) {
                 continue;
             }
             if (sameColor.includes(board[from_row + x][from_col + y])) {
