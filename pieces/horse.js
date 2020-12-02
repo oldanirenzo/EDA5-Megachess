@@ -1,4 +1,4 @@
-const horse = async (board, from_row, from_col, sameColor, enemyColor, eatPiece, movePiece) => {
+const horse = async (board, from_row, from_col, sameColor, eatPiece, movePiece) => {
 
     let horseMovements = []
 
@@ -11,16 +11,15 @@ const horse = async (board, from_row, from_col, sameColor, enemyColor, eatPiece,
             if (sameColor.includes(board[from_row + x][from_col + y])) {
                 continue;
             }
-            // if (' '.includes(board[from_row + x][from_col + y])) {
-            //     horseMovements.push({
-            //         value: movePiece[board[from_row][from_col]],
-            //         from_row: from_row,
-            //         from_col: from_col,
-            //         to_row: from_row + x,
-            //         to_col: from_col + y,
-            //     })
-            // }
-            if (enemyColor.includes(board[from_row + x][from_col + y])) {
+            if (' '.includes(board[from_row + x][from_col + y])) {
+                horseMovements.push({
+                    value: movePiece[board[from_row][from_col]],
+                    from_row: from_row,
+                    from_col: from_col,
+                    to_row: from_row + x,
+                    to_col: from_col + y,
+                })
+            } else {
                 horseMovements.push({
                     value: eatPiece[board[from_row + x][from_col + y]],
                     from_row: from_row,
@@ -29,7 +28,6 @@ const horse = async (board, from_row, from_col, sameColor, enemyColor, eatPiece,
                     to_col: from_col + y,
                 })
             }
-
         }
     }
 
@@ -40,7 +38,7 @@ const horse = async (board, from_row, from_col, sameColor, enemyColor, eatPiece,
                 continue;
             }
             if (sameColor.includes(board[from_row + x][from_col + y])) {
-                break;
+                continue;
             }
             if (' '.includes(board[from_row + x][from_col + y])) {
                 horseMovements.push({
@@ -50,8 +48,7 @@ const horse = async (board, from_row, from_col, sameColor, enemyColor, eatPiece,
                     to_row: from_row + x,
                     to_col: from_col + y,
                 })
-            }
-            if (enemyColor.includes(board[from_row + x][from_col + y])) {
+            } else {
                 horseMovements.push({
                     value: eatPiece[board[from_row + x][from_col + y]],
                     from_row: from_row,

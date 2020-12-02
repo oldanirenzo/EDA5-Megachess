@@ -1,4 +1,4 @@
-const bishop = async (board, from_row, from_col, sameColor, enemyColor, eatPiece, movePiece) => {
+const bishop = async (board, from_row, from_col, sameColor, eatPiece, movePiece) => {
 
     let bishopMovements = [];
 
@@ -10,19 +10,18 @@ const bishop = async (board, from_row, from_col, sameColor, enemyColor, eatPiece
         };
 
         if (sameColor.includes(board[from_row - x][from_col + x])) {
-            if (x !== 1) {
-                bishopMovements.push({
-                    value: movePiece[board[from_row][from_col]],
-                    from_row: from_row,
-                    from_col: from_col,
-                    to_row: from_row - x + 1,
-                    to_col: from_col + x - 1,
-                })
-            }
             break diagonalArribaDerecha;
         }
 
-        if (enemyColor.includes(board[from_row - x][from_col + x])) {
+        if (' '.includes(board[from_row - x][from_col + x])) {
+            bishopMovements.push({
+                value: movePiece[board[from_row][from_col]],
+                from_row: from_row,
+                from_col: from_col,
+                to_row: from_row - x,
+                to_col: from_col + x,
+            })
+        } else {
             bishopMovements.push({
                 value: eatPiece[board[from_row - x][from_col + x]],
                 from_row: from_row,
@@ -42,19 +41,18 @@ const bishop = async (board, from_row, from_col, sameColor, enemyColor, eatPiece
         }
 
         if (sameColor.includes(board[from_row - y][from_col - y])) {
-            if (y !== 1) {
-                bishopMovements.push({
-                    value: movePiece[board[from_row][from_col]],
-                    from_row: from_row,
-                    from_col: from_col,
-                    to_row: from_row - y + 1,
-                    to_col: from_col - y + 1,
-                })
-            }
             break diagonalArribaIzquierda;
         }
 
-        if (enemyColor.includes(board[from_row - y][from_col - y])) {
+        if (' '.includes(board[from_row - y][from_col - y])) {
+            bishopMovements.push({
+                value: movePiece[board[from_row][from_col]],
+                from_row: from_row,
+                from_col: from_col,
+                to_row: from_row - y,
+                to_col: from_col - y,
+            })
+        } else {
             bishopMovements.push({
                 value: eatPiece[board[from_row - y][from_col - y]],
                 from_row: from_row,
@@ -76,19 +74,18 @@ const bishop = async (board, from_row, from_col, sameColor, enemyColor, eatPiece
         };
 
         if (sameColor.includes(board[from_row + x][from_col - x])) {
-            if (x !== 1) {
-                bishopMovements.push({
-                    value: movePiece[board[from_row][from_col]],
-                    from_row: from_row,
-                    from_col: from_col,
-                    to_row: from_row + x - 1,
-                    to_col: from_col - x + 1,
-                })
-            }
             break diagonalAbajoIzquierda;
         }
 
-        if (enemyColor.includes(board[from_row + x][from_col - x])) {
+        if (' '.includes(board[from_row + x][from_col - x])) {
+            bishopMovements.push({
+                value: movePiece[board[from_row][from_col]],
+                from_row: from_row,
+                from_col: from_col,
+                to_row: from_row + x,
+                to_col: from_col - x,
+            })
+        } else {
 
             bishopMovements.push({
                 value: eatPiece[board[from_row + x][from_col - x]],
@@ -111,19 +108,18 @@ const bishop = async (board, from_row, from_col, sameColor, enemyColor, eatPiece
         }
 
         if (sameColor.includes(board[from_row + y][from_col + y])) {
-            if (y !== 1) {
-                bishopMovements.push({
-                    value: movePiece[board[from_row][from_col]],
-                    from_row: from_row,
-                    from_col: from_col,
-                    to_row: from_row + y - 1,
-                    to_col: from_col + y - 1,
-                })
-            }
             break diagonalAbajoDerecha;
         }
 
-        if (enemyColor.includes(board[from_row + y][from_col + y])) {
+        if (' '.includes(board[from_row + y][from_col + y])) {
+            bishopMovements.push({
+                value: movePiece[board[from_row][from_col]],
+                from_row: from_row,
+                from_col: from_col,
+                to_row: from_row + y,
+                to_col: from_col + y,
+            })
+        } else {
 
             bishopMovements.push({
                 value: eatPiece[board[from_row + y][from_col + y]],

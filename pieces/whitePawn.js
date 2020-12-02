@@ -1,4 +1,4 @@
-const whitePawn = async (board, from_row, from_col, enemyColor, eatPiece) => {
+const whitePawn = async (board, from_row, from_col, eatPiece) => {
 
     let pawnMovements = [];
 
@@ -14,7 +14,7 @@ const whitePawn = async (board, from_row, from_col, enemyColor, eatPiece) => {
                 })
             }
         }
-        if (enemyColor.includes(board[from_row - 1][from_col + 1])) {
+        if ('kqrbh'.includes(board[from_row - 1][from_col + 1])) {
             pawnMovements.push({
                 value: eatPiece[board[from_row - 1][from_col + 1]],
                 from_row: from_row,
@@ -24,7 +24,7 @@ const whitePawn = async (board, from_row, from_col, enemyColor, eatPiece) => {
 
             })
         }
-        if (enemyColor.includes(board[from_row - 1][from_col - 1])) {
+        if ('kqrbh'.includes(board[from_row - 1][from_col - 1])) {
             pawnMovements.push({
                 value: eatPiece[board[from_row - 1][from_col - 1]],
                 from_row: from_row,

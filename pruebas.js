@@ -1,7 +1,7 @@
 // const { whiteMovements } = require("./blancasConSwitch");
-const matriz = require("./movements/matriz");
-const { blackMovements } = require("./movements/negrasConSwitch");
-const decideAction = require("./movements/options");
+// const matriz = require("./movements/matriz");
+// const { blackMovements } = require("./movements/negrasConSwitch");
+// const decideAction = require("./movements/options");
 
 
 const negras = 'phbrqk';
@@ -22,38 +22,22 @@ let data = {
     }
 }
 
+
+
 // whiteMovements(data)
 //     .then(move => console.log(JSON.stringify(move)))
 //     .catch(err => reject(err))
 
 
-console.table(matriz(data))
+// console.table(matriz(data))
 // console.log(matriz(data)[14][15])
 // let action = decideAction(data);
 
-decideAction(data)
-    .then(res => {
-        console.log('RES: ' + JSON.stringify(res))
-    })
-    .catch(err => console.log(err))
+// decideAction(data)
+//     .then(res => {
+//         console.log('RES: ' + JSON.stringify(res))
+//     })
+//     .catch(err => console.log(err))
 
 
 // console.log(negras.includes(matriz(data)[8][5])) 
-
-
-// console.log(negras.includes(matriz(data)[1][5]))
-// console.log(value[matriz(data)[1][6]])
-// let data = {
-//     event: 'your_turn',
-//     data: {
-//         board_id: '46f2bec3-0fc2-4baf-a5e5-7f6231c76735',
-//         turn_token: '5236b513-fa35-4522-bdcf-b2258ee92b48',
-//         username: 'oldanirenzo',
-//         actual_turn: 'white',
-//         board: 'rrhhbbqqkkbbhhrrrrhhbbqqkkbbhhrrpppppppppppppppppppppppppppppppp                                                                                                                                PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPRRHHBBQQKKBBHHRRRRHHBBQQKKBBHHRR',
-//         move_left: 159,
-//         opponent_username: 'oldanirenzo'
-//     }
-// }
-
-

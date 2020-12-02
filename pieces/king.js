@@ -1,4 +1,4 @@
-const king = async (board, from_row, from_col, sameColor, enemyColor, eatPiece, movePiece) => {
+const king = async (board, from_row, from_col, sameColor, eatPiece, movePiece) => {
 
     let kingMovements = [];
 
@@ -8,9 +8,11 @@ const king = async (board, from_row, from_col, sameColor, enemyColor, eatPiece, 
             if ((from_row + row || from_col + col) > 15 || (from_row + row || from_col + col) < 0) {
                 continue;
             }
+
             if (sameColor.includes(board[from_row + row][from_col + col])) {
                 continue;
             }
+
             if (' '.includes(board[from_row + row][from_col + col])) {
                 kingMovements.push({
                     value: movePiece[board[from_row][from_col]],
@@ -19,8 +21,7 @@ const king = async (board, from_row, from_col, sameColor, enemyColor, eatPiece, 
                     to_row: from_row + row,
                     to_col: from_col + col,
                 })
-            }
-            if (enemyColor.includes(board[from_row + row][from_col + col])) {
+            } else {
                 kingMovements.push({
                     value: eatPiece[board[from_row + row][from_col + col]],
                     from_row: from_row,
