@@ -13,10 +13,6 @@ let data = {
     }
 }
 
-let whiteMovementsArray = []
-
-
-
 describe('Piezas blancas, Movimientos.', () => {
     test('Debe mover el peon 2 posiciones hacia adelante', () => {
         return whiteMovements(data).then(movimiento => {
