@@ -1,4 +1,4 @@
-const { whiteMovements } = require("../movements/blancasConSwitch");
+const { whiteMovements } = require("../movements/white");
 
 let data = {
     event: 'your_turn',
@@ -12,10 +12,6 @@ let data = {
         opponent_username: 'oldanirenzo'
     }
 }
-
-let whiteMovementsArray = []
-
-
 
 describe('Piezas blancas, Movimientos.', () => {
     test('Debe mover el peon 2 posiciones hacia adelante', () => {

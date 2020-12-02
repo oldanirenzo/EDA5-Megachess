@@ -1,8 +1,6 @@
 const acceptChallenge = require("../challenge/acceptChallenge")
-// const { blackMovements } = require("./black")
-const { blackMovements } = require("./negrasConSwitch")
-// const { whiteMovements } = require("./white")
-const { whiteMovements } = require("./blancasConSwitch")
+const { blackMovements } = require("./black")
+const { whiteMovements } = require("./white")
 
 const decideAction = (data) => {
     return new Promise((resolve, reject) => {
@@ -16,8 +14,8 @@ const decideAction = (data) => {
                     })
                     .catch(err => reject(err))
                 break;
-            case 'your_turn':
 
+            case 'your_turn':
                 if (data.data.actual_turn === 'white') {
                     (whiteMovements(data))
                         .then(movement => {
@@ -43,6 +41,7 @@ const decideAction = (data) => {
                 console.log(data)
                 break;
             default:
+                console.log('No se encontro la opción.')
                 break;
         }
     })

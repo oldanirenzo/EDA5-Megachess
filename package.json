@@ -4,7 +4,8 @@
   "description": "Megachess for Eventbrite",
   "main": "index.js",
   "scripts": {
-    "test": "jest --env=node"
+    "test": "jest --env=node",
+    "test:cobertura": "jest --coverage"
   },
   "author": "",
   "license": "ISC",
