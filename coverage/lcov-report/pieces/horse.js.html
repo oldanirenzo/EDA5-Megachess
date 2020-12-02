@@ -30,9 +30,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">61.54% </span>
+                <span class="strong">66.67% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>16/26</span>
+                <span class='fraction'>16/24</span>
             </div>
         
             
@@ -122,10 +122,7 @@
 <a name='L63'></a><a href='#L63'>63</a>
 <a name='L64'></a><a href='#L64'>64</a>
 <a name='L65'></a><a href='#L65'>65</a>
-<a name='L66'></a><a href='#L66'>66</a>
-<a name='L67'></a><a href='#L67'>67</a>
-<a name='L68'></a><a href='#L68'>68</a>
-<a name='L69'></a><a href='#L69'>69</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
+<a name='L66'></a><a href='#L66'>66</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">48x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -138,8 +135,8 @@
 <span class="cline-any cline-yes">96x</span>
 <span class="cline-any cline-yes">96x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -148,8 +145,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -163,11 +158,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">48x</span>
 <span class="cline-any cline-yes">96x</span>
-<span class="cline-any cline-yes">120x</span>
+<span class="cline-any cline-yes">192x</span>
 <span class="cline-any cline-yes">48x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">72x</span>
-<span class="cline-any cline-yes">72x</span>
+<span class="cline-any cline-yes">144x</span>
+<span class="cline-any cline-yes">144x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -178,7 +173,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -193,7 +187,7 @@
 <span class="cline-any cline-yes">48x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span></td><td class="text"><pre class="prettyprint lang-js">const horse = async (board, from_row, from_col, sameColor, enemyColor, eatPiece, movePiece) =&gt; {
+<span class="cline-any cline-yes">2x</span></td><td class="text"><pre class="prettyprint lang-js">const horse = async (board, from_row, from_col, sameColor, eatPiece, movePiece) =&gt; {
 &nbsp;
     let horseMovements = []
 &nbsp;
@@ -206,16 +200,15 @@
             <span class="missing-if-branch" title="else path not taken" >E</span>if (sameColor.includes(board[from_row + x][from_col + y])) {
                 continue;
             }
-            // if (' '.includes(board[from_row + x][from_col + y])) {
-            //     horseMovements.push({
-            //         value: movePiece[board[from_row][from_col]],
-            //         from_row: from_row,
-            //         from_col: from_col,
-            //         to_row: from_row + x,
-            //         to_col: from_col + y,
-            //     })
-            // }
-<span class="cstat-no" title="statement not covered" >            if (enemyColor.includes(board[from_row + x][from_col + y])) {</span>
+<span class="cstat-no" title="statement not covered" >            if (' '.includes(board[from_row + x][from_col + y])) {</span>
+<span class="cstat-no" title="statement not covered" >                horseMovements.push({</span>
+                    value: movePiece[board[from_row][from_col]],
+                    from_row: from_row,
+                    from_col: from_col,
+                    to_row: from_row + x,
+                    to_col: from_col + y,
+                })
+            } else {
 <span class="cstat-no" title="statement not covered" >                horseMovements.push({</span>
                     value: eatPiece[board[from_row + x][from_col + y]],
                     from_row: from_row,
@@ -224,7 +217,6 @@
                     to_col: from_col + y,
                 })
             }
-&nbsp;
         }
     }
 &nbsp;
@@ -235,7 +227,7 @@
                 continue;
             }
             <span class="missing-if-branch" title="else path not taken" >E</span>if (sameColor.includes(board[from_row + x][from_col + y])) {
-                break;
+                continue;
             }
 <span class="cstat-no" title="statement not covered" >            if (' '.includes(board[from_row + x][from_col + y])) {</span>
 <span class="cstat-no" title="statement not covered" >                horseMovements.push({</span>
@@ -245,8 +237,7 @@
                     to_row: from_row + x,
                     to_col: from_col + y,
                 })
-            }
-<span class="cstat-no" title="statement not covered" >            if (enemyColor.includes(board[from_row + x][from_col + y])) {</span>
+            } else {
 <span class="cstat-no" title="statement not covered" >                horseMovements.push({</span>
                     value: eatPiece[board[from_row + x][from_col + y]],
                     from_row: from_row,
@@ -268,7 +259,7 @@ module.exports = horse;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Tue Dec 01 2020 21:40:59 GMT-0300 (Argentina Standard Time)
+                at Wed Dec 02 2020 02:00:16 GMT-0300 (Argentina Standard Time)
             </div>
         </div>
         <script src="../prettify.js"></script>

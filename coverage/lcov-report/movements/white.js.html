@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">92.73% </span>
+                <span class="strong">96% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>51/55</span>
+                <span class='fraction'>48/50</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">81.82% </span>
+                <span class="strong">88.89% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>9/11</span>
+                <span class='fraction'>8/9</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">92.45% </span>
+                <span class="strong">95.83% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>49/53</span>
+                <span class='fraction'>46/48</span>
             </div>
         
             
@@ -159,26 +159,7 @@
 <a name='L100'></a><a href='#L100'>100</a>
 <a name='L101'></a><a href='#L101'>101</a>
 <a name='L102'></a><a href='#L102'>102</a>
-<a name='L103'></a><a href='#L103'>103</a>
-<a name='L104'></a><a href='#L104'>104</a>
-<a name='L105'></a><a href='#L105'>105</a>
-<a name='L106'></a><a href='#L106'>106</a>
-<a name='L107'></a><a href='#L107'>107</a>
-<a name='L108'></a><a href='#L108'>108</a>
-<a name='L109'></a><a href='#L109'>109</a>
-<a name='L110'></a><a href='#L110'>110</a>
-<a name='L111'></a><a href='#L111'>111</a>
-<a name='L112'></a><a href='#L112'>112</a>
-<a name='L113'></a><a href='#L113'>113</a>
-<a name='L114'></a><a href='#L114'>114</a>
-<a name='L115'></a><a href='#L115'>115</a>
-<a name='L116'></a><a href='#L116'>116</a>
-<a name='L117'></a><a href='#L117'>117</a>
-<a name='L118'></a><a href='#L118'>118</a>
-<a name='L119'></a><a href='#L119'>119</a>
-<a name='L120'></a><a href='#L120'>120</a>
-<a name='L121'></a><a href='#L121'>121</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<a name='L103'></a><a href='#L103'>103</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -195,28 +176,11 @@
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
@@ -304,7 +268,6 @@ const bishop = require("../pieces/bishop");
 const horse = require("../pieces/horse");
 const whitePawn = require("../pieces/whitePawn");
 const matriz = require("./matriz");
-const { randomMovements } = require("./movementsWithoutEating");
 const { moveWhitePiece } = require('../piecesValues/moveValue')
 const { eatBlackPiece } = require('../piecesValues/eatValue')
 &nbsp;
@@ -315,29 +278,12 @@ const whiteMovements = (data) =&gt; {
         let board_id = data.data.board_id;
         let turn_token = data.data.turn_token;
         let board = matriz(data);
-        // console.table(board);
         let sameColor = 'KQRBHP';
-        let enemyColor = 'kqrbhp';
         let movementsArray = [];
         // console.table(board);
 &nbsp;
-        whitePiecesMovements(board, sameColor, enemyColor, movementsArray)
+        whitePiecesMovements(board, sameColor, movementsArray)
             .then((movements) =&gt; {
-&nbsp;
-                <span class="missing-if-branch" title="if path not taken" >I</span>if (movements.length === 0) {
-                    let movement = <span class="cstat-no" title="statement not covered" >randomMovements(board)</span>
-<span class="cstat-no" title="statement not covered" >                    resolve({</span>
-                        action: 'move',
-                        data: {
-                            board_id,
-                            turn_token,
-                            from_row: movement.from_row,
-                            from_col: movement.from_col,
-                            to_row: movement.to_row,
-                            to_col: movement.to_col,
-                        }
-                    })
-                }
 &nbsp;
                 let whiteBestMovement = movements.reduce((acum, current) =&gt; {
 &nbsp;
@@ -368,34 +314,34 @@ const whiteMovements = (data) =&gt; {
 }
 &nbsp;
 &nbsp;
-const whitePiecesMovements = async (board, sameColor, enemyColor, movementsArray) =&gt; {
+const whitePiecesMovements = async (board, sameColor, movementsArray) =&gt; {
 &nbsp;
 &nbsp;
     for (let row = 0; row &lt; board.length; row++) {
         for (let col = 0; col &lt; board.length; col++) {
             switch (board[row][col]) {
                 case 'P':
-                    movementsArray.push(await whitePawn(board, row, col, enemyColor, eatBlackPiece));
+                    movementsArray.push(await whitePawn(board, row, col, eatBlackPiece));
                     break;
 &nbsp;
                 case 'H':
-                    movementsArray.push(await horse(board, row, col, sameColor, enemyColor, eatBlackPiece, moveWhitePiece));
+                    movementsArray.push(await horse(board, row, col, sameColor, eatBlackPiece, moveWhitePiece));
                     break;
 &nbsp;
                 case 'B':
-                    movementsArray.push(await bishop(board, row, col, sameColor, enemyColor, eatBlackPiece, moveWhitePiece));
+                    movementsArray.push(await bishop(board, row, col, sameColor, eatBlackPiece, moveWhitePiece));
                     break;
 &nbsp;
                 case 'R':
-                    movementsArray.push(await rook(board, row, col, sameColor, enemyColor, eatBlackPiece, moveWhitePiece));
+                    movementsArray.push(await rook(board, row, col, sameColor, eatBlackPiece, moveWhitePiece));
                     break;
 &nbsp;
                 case 'Q':
-                    movementsArray.push(await queen(board, row, col, sameColor, enemyColor, eatBlackPiece, moveWhitePiece));
+                    movementsArray.push(await queen(board, row, col, sameColor, eatBlackPiece, moveWhitePiece));
                     break;
 &nbsp;
                 case 'K':
-                    movementsArray.push(await king(board, row, col, sameColor, enemyColor, eatBlackPiece, moveWhitePiece));
+                    movementsArray.push(await king(board, row, col, sameColor, eatBlackPiece, moveWhitePiece));
                     break;
 &nbsp;
                 default:
@@ -424,7 +370,7 @@ module.exports = {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Tue Dec 01 2020 21:40:59 GMT-0300 (Argentina Standard Time)
+                at Wed Dec 02 2020 02:00:16 GMT-0300 (Argentina Standard Time)
             </div>
         </div>
         <script src="../prettify.js"></script>
