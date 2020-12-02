@@ -6,6 +6,7 @@ const matriz = ({ data }) => {
     for (let i = 0; i < 16; i++) {
         let row = [];
         for (let j = 0; j < 16; j++) {
+            if (board[index] === undefined) throw Error('Se detecto un valor undefined');
             row.push(board[index])
             index++
         }
