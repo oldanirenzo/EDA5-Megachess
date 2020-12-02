@@ -5,7 +5,6 @@ const bishop = require("../pieces/bishop");
 const horse = require("../pieces/horse");
 const blackPawn = require("../Pieces/BlackPawn");
 const matriz = require("./matriz");
-const { randomMovements } = require("./movementsWithoutEating");
 const { moveBlackPiece } = require('../piecesValues/moveValue')
 const { eatWhitePiece } = require('../piecesValues/eatValue')
 
@@ -17,29 +16,12 @@ const blackMovements = (data) => {
         let board_id = data.data.board_id;
         let turn_token = data.data.turn_token;
         let board = matriz(data)
-        // console.table(board);
-        let enemyColor = 'KQRBHP';
         let sameColor = 'kqrbhp';
         let movementsArray = [];
 
-        blackPiecesMovements(board, sameColor, enemyColor, movementsArray)
+        blackPiecesMovements(board, sameColor, movementsArray)
             .then((movements) => {
-                if (movements.length === 0) {
-                    let movement = randomMovements(board)
-                    resolve({
-                        action: 'move',
-                        data: {
-                            board_id,
-                            turn_token,
-                            from_row: movement.from_row,
-                            from_col: movement.from_col,
-                            to_row: movement.to_row,
-                            to_col: movement.to_col,
-                        }
-                    })
-                }
-                // console.log(blackMovementsArray)
-
+                
                 let blackBestMovement = movements.reduce((acum, current) => {
                     if (acum.value >= current.value) {
                         return acum
@@ -68,29 +50,29 @@ const blackMovements = (data) => {
     })
 }
 
-const blackPiecesMovements = async (board, sameColor, enemyColor, movementsArray) => {
+const blackPiecesMovements = async (board, sameColor, movementsArray) => {
 
     for (let row = 0; row < board.length; row++) {
         for (let col = 0; col < board.length; col++) {
             switch (board[row][col]) {
 
                 case 'p':
-                    movementsArray.push(await blackPawn(board, row, col, enemyColor, eatWhitePiece));
+                    movementsArray.push(await blackPawn(board, row, col, eatWhitePiece));
                     break;
                 case 'h':
-                    movementsArray.push(await horse(board, row, col, sameColor, enemyColor, eatWhitePiece, moveBlackPiece));
+                    movementsArray.push(await horse(board, row, col, sameColor, eatWhitePiece, moveBlackPiece));
                     break;
                 case 'b':
-                    movementsArray.push(await bishop(board, row, col, sameColor, enemyColor, eatWhitePiece, moveBlackPiece));
+                    movementsArray.push(await bishop(board, row, col, sameColor, eatWhitePiece, moveBlackPiece));
                     break;
                 case 'r':
-                    movementsArray.push(await rook(board, row, col, sameColor, enemyColor, eatWhitePiece, moveBlackPiece));
+                    movementsArray.push(await rook(board, row, col, sameColor, eatWhitePiece, moveBlackPiece));
                     break;
                 case 'q':
-                    movementsArray.push(await queen(board, row, col, sameColor, enemyColor, eatWhitePiece, moveBlackPiece));
+                    movementsArray.push(await queen(board, row, col, sameColor, eatWhitePiece, moveBlackPiece));
                     break;
                 case 'k':
-                    movementsArray.push(await king(board, row, col, sameColor, enemyColor, eatWhitePiece, moveBlackPiece));
+                    movementsArray.push(await king(board, row, col, sameColor, eatWhitePiece, moveBlackPiece));
                     break;
                 default:
                     break;
