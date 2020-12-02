@@ -1,15 +1,13 @@
 const matriz = require("../movements/matriz");
 
 let data = {
-    event: 'your_turn',
     data: {
-        board_id: '9294de41-a6e8-4dc1-be6e-0b4310a8f274',
-        turn_token: '2a7ed463-8419-4dce-87a7-2490c0ad9d33',
-        username: 'oldanirenzo',
-        actual_turn: 'white',
         board: 'rrhhbbqqkkbbhhrrrrhhbbqqkkbbhhrrpppppppppppppppppppppppppppppppp                                                                                                                                PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPRRHHBBQQKKBBHHRRRRHHBBQQKKBBHHRR',
-        move_left: 199,
-        opponent_username: 'oldanirenzo'
+    }
+}
+let data2 = {
+    data: {
+        board: 'rrhhbbqqkkbbhhrrrrhhbbqqkkbbhhrrpppppppppppppppppppppppppppp                                                                                                                                PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPRRHHBBQQKKBBHHRRRRHHBBQQKKBBHHRR',
     }
 }
 
@@ -25,5 +23,10 @@ describe('Matriz', () => {
                     .toBeDefined()
             }
         }
+    });
+    test('Debe tirar error en caso de que no se encuentre con todos los campos llenos.', () => {
+        expect(() => {
+            matriz(data2)
+        }).toThrow('Se detecto un valor undefined')
     });
 });

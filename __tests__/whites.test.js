@@ -15,7 +15,8 @@ let data = {
 
 describe('Piezas blancas, Movimientos.', () => {
     test('Debe mover el peon 2 posiciones hacia adelante', () => {
-        return whiteMovements(data).then(movimiento => {
+        return whiteMovements(data)
+        .then(movimiento => {
             expect(movimiento).toStrictEqual({
                 action: 'move',
                 data: {
@@ -32,22 +33,22 @@ describe('Piezas blancas, Movimientos.', () => {
 
     test('Los from_row, from_col, to_row y to_col deben ser mayores o iguales a 0', () => {
         return whiteMovements(data)
-        .then(movimiento => {
-            expect(movimiento.data.from_row).toBeGreaterThanOrEqual(0);
-            expect(movimiento.data.from_col).toBeGreaterThanOrEqual(0);
-            expect(movimiento.data.to_row).toBeGreaterThanOrEqual(0);
-            expect(movimiento.data.to_col).toBeGreaterThanOrEqual(0);
-        })
+            .then(movimiento => {
+                expect(movimiento.data.from_row).toBeGreaterThanOrEqual(0);
+                expect(movimiento.data.from_col).toBeGreaterThanOrEqual(0);
+                expect(movimiento.data.to_row).toBeGreaterThanOrEqual(0);
+                expect(movimiento.data.to_col).toBeGreaterThanOrEqual(0);
+            })
     });
 
     test('Los from_row, from_col, to_row y to_col deben ser menores o iguales a 15', () => {
         return whiteMovements(data)
-        .then(movimiento => {
-            expect(movimiento.data.from_row).toBeLessThanOrEqual(15);
-            expect(movimiento.data.from_col).toBeLessThanOrEqual(15);
-            expect(movimiento.data.to_row).toBeLessThanOrEqual(15);
-            expect(movimiento.data.to_col).toBeLessThanOrEqual(15);
-        })
+            .then(movimiento => {
+                expect(movimiento.data.from_row).toBeLessThanOrEqual(15);
+                expect(movimiento.data.from_col).toBeLessThanOrEqual(15);
+                expect(movimiento.data.to_row).toBeLessThanOrEqual(15);
+                expect(movimiento.data.to_col).toBeLessThanOrEqual(15);
+            })
     });
 });
 
