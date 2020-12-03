@@ -42,7 +42,6 @@ const whiteMovements = (data) => {
                     }
                 })
             })
-            .catch(err => reject(err))
             .finally(() => {
                 movementsArray = []
                 whiteBestMovement = []

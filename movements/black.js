@@ -42,7 +42,6 @@ const blackMovements = (data) => {
                     }
                 })
             })
-            .catch(err => reject(err))
             .finally(() => {
                 movements = []
                 blackBestMovement = []
