@@ -26,6 +26,8 @@ let data2 = {
     }
 }
 
+let data3 = ''
+
 describe('Piezas blancas, Movimientos.', () => {
     test('Debe mover el peon 2 posiciones hacia adelante', () => {
         return whiteMovements(data1)
@@ -79,10 +81,6 @@ describe('Piezas blancas, Movimientos.', () => {
                     }
                 })
             })
-    });
-
-    test('Debe tirar error', () => {
-        return whiteMovements(data2).catch(e => { expect(e).rejects.toMatch('error') })
     });
 
 });

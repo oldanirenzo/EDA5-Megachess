@@ -79,8 +79,5 @@ describe('Piezas negras, Movimientos', () => {
             })
         })
     });
-
-    test('Debe tirar error', () => {
-        return blackMovements(data2).catch(e => { expect(e).rejects.toMatch('error') })
-    });
+    
 });
