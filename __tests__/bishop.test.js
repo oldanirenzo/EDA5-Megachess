@@ -44,7 +44,7 @@ let board3 = [
     ['r', 'r', 'h', 'h', 'b', 'b', 'q', 'q', 'k', 'k', 'b', 'b', 'h', 'h', 'r', 'r'],
     ['r', 'r', 'h', 'h', 'b', 'b', 'q', 'q', 'k', 'k', 'b', 'b', 'h', ' ', ' ', 'r'],
     ['p', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'],
-    ['p', 'p', 'p', 'p', 'p', 'p', ' ', ' ', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'],
+    ['p', 'p', 'p', 'p', 'p', 'p', ' ', 'p', ' ', 'p', 'p', 'p', 'p', 'p', 'p', 'p'],
     [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
     [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
     [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
@@ -63,7 +63,7 @@ let board3 = [
 
 describe('Bishop movements', () => {
 
-    test('Debe devolver array vacio', async () => {
+    test('Debe devolver un array vacio', async () => {
         const moveBishop = await bishop(board1, 14, 4, whitePieces, eatBlackPiece, moveWhitePiece)
         expect(moveBishop).toEqual([])
     })
