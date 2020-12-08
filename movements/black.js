@@ -11,7 +11,7 @@ const { eatWhitePiece } = require('../piecesValues/eatValue')
 
 const blackMovements = (data) => {
 
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
 
         let board_id = data.data.board_id;
         let turn_token = data.data.turn_token;
@@ -21,7 +21,7 @@ const blackMovements = (data) => {
 
         blackPiecesMovements(board, sameColor, movementsArray)
             .then((movements) => {
-                
+
                 let blackBestMovement = movements.reduce((acum, current) => {
                     if (acum.value >= current.value) {
                         return acum
@@ -29,7 +29,6 @@ const blackMovements = (data) => {
                         return current
                     }
                 })
-                // console.log(blackBestMovement)
                 resolve({
                     action: 'move',
                     data: {
@@ -82,11 +81,11 @@ const blackPiecesMovements = async (board, sameColor, movementsArray) => {
 
     //Recorro cada array y elemento que posea adentro del mismo, y lo agrego al array 'allMovements'
     movementsArray.forEach(element => {
-        element.forEach(elementChildren => {
-            allMovements.push(elementChildren)
+        element.forEach(children => {
+            allMovements.push(children)
         });
     });
-    // console.log(allMovements)
+    
     return allMovements;
 }
 

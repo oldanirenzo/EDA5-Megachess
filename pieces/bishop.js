@@ -3,12 +3,14 @@ const { whiteBishopPositionValue, blackBishopPositionValue } = require("../piece
 const bishop = async (board, from_row, from_col, sameColor, eatPiece, movePiece) => {
 
     let bishopMovements = [];
+    // Asigno un valor a cada casilla del tablero, para mejorar el posicionamiento de las piezas.
     let positionValue;
     sameColor.includes('B') ? positionValue = whiteBishopPositionValue : positionValue = blackBishopPositionValue;
 
     // MOVIMIENTO DIAGONAL ARRIBA A LA DERECHA
     diagonalArribaDerecha: for (let x = 1; x < 16; x++) {
 
+        // Encontro una pieza aliada, asi que pasa al siguiente loop.
         if (from_col + x > 15 || from_row - x < 0) {
             break diagonalArribaDerecha;
         };
@@ -17,6 +19,7 @@ const bishop = async (board, from_row, from_col, sameColor, eatPiece, movePiece)
             break diagonalArribaDerecha;
         }
 
+        // Guarda en el array cualquier movimiento hacia un espacio vacio hacia arriba a la derecha.
         if (' '.includes(board[from_row - x][from_col + x])) {
             bishopMovements.push({
                 value: movePiece[board[from_row][from_col]] * positionValue[from_row - x][from_col + x],
@@ -26,6 +29,7 @@ const bishop = async (board, from_row, from_col, sameColor, eatPiece, movePiece)
                 to_col: from_col + x,
             })
         } else {
+        // Encontro un enemigo, guarda el movimiento hacia el.
             bishopMovements.push({
                 value: eatPiece[board[from_row - x][from_col + x]] + positionValue[from_row - x][from_col + x],
                 from_row: from_row,

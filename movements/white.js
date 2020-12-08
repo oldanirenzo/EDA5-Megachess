@@ -10,14 +10,13 @@ const { eatBlackPiece } = require('../piecesValues/eatValue')
 
 const whiteMovements = (data) => {
 
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
 
         let board_id = data.data.board_id;
         let turn_token = data.data.turn_token;
         let board = matriz(data);
         let sameColor = 'KQRBHP';
         let movementsArray = [];
-        // console.table(board);
 
         whitePiecesMovements(board, sameColor, movementsArray)
             .then((movements) => {
@@ -89,11 +88,11 @@ const whitePiecesMovements = async (board, sameColor, movementsArray) => {
 
     //Recorro cada array y elemento que posea adentro del mismo, y lo agrego al array 'allMovements'
     movementsArray.forEach(element => {
-        element.forEach(elementChildren => {
-            allMovements.push(elementChildren)
+        element.forEach(children => {
+            allMovements.push(children)
         });
     });
-    // console.log(allMovements)
+    
     return allMovements;
 }
 

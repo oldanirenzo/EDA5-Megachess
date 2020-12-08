@@ -2,17 +2,21 @@ const { whiteRookPositionValue, blackRookPositionValue } = require("../piecesVal
 
 const rook = async (board, from_row, from_col, sameColor, eatPiece, movePiece) => {
 
-    let rookMovements = []
+    let rookMovements = [];
+
+    // Asigno un valor a cada casilla del tablero, para mejorar el posicionamiento de las piezas.
     let positionValue;
     sameColor.includes('R') ? positionValue = whiteRookPositionValue : positionValue = blackRookPositionValue;
 
     // MOVIMIENTO VERTICAL HACIA ARRIBA
     verticalArriba: for (let row = from_row - 1; row > -1; row--) {
 
+        // Encontro una pieza aliada, asi que pasa al siguiente loop.
         if (sameColor.includes(board[row][from_col])) {
             break verticalArriba;
         }
 
+        // Guarda en el array cualquier movimiento hacia un espacio vacio hacia arriba.
         if (' '.includes(board[row][from_col])) {
             rookMovements.push({
                 value: movePiece[board[from_row][from_col]] * positionValue[row][from_col],
@@ -22,6 +26,7 @@ const rook = async (board, from_row, from_col, sameColor, eatPiece, movePiece) =
                 to_col: from_col,
             })
         } else {
+            // Encontro un enemigo, guarda el movimiento hacia el.
             rookMovements.push({
                 value: eatPiece[board[row][from_col]] + positionValue[row][from_col],
                 from_row: from_row,
