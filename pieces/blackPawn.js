@@ -46,7 +46,7 @@ const blackPawn = async (board, from_row, from_col, eatPiece) => {
             })
         }
         pawnMovements.push({
-            value: 10 * blackPawnPositionValue[from_row + 1][from_col],
+            value: 50 * blackPawnPositionValue[from_row + 1][from_col],
             from_row: from_row,
             from_col: from_col,
             to_row: from_row + 1,

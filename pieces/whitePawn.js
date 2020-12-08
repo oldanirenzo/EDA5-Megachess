@@ -47,7 +47,7 @@ const whitePawn = async (board, from_row, from_col, eatPiece) => {
             })
         }
         pawnMovements.push({
-            value: 10 * whitePawnPositionValue[from_row - 1][from_col],
+            value: 50 * whitePawnPositionValue[from_row - 1][from_col],
             from_row: from_row,
             from_col: from_col,
             to_row: from_row - 1,

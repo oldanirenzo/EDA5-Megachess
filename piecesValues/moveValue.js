@@ -1,20 +1,18 @@
 
 let moveWhitePiece = {
-    P: 10,
-    H: 20,
-    B: 30,
-    R: 40,
+    H: 30,
+    B: 40,
+    R: 60,
     Q: 5,
-    K: 50,
+    K: 100,
 }
 
 let moveBlackPiece = {
-    p: 10,
-    h: 20,
-    b: 30,
-    r: 40,
+    h: 30,
+    b: 40,
+    r: 60,
     q: 5,
-    k: 50,
+    k: 100,
 }
 
 module.exports = {

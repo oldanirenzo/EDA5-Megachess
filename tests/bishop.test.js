@@ -93,7 +93,7 @@ describe('Bishop movements', () => {
     test('Debe tener al menos un movimiento hacia una celda vacia arriba a la derecha.', async () => {
         const moveBishop = await bishop(board2, 8, 7, whitePieces, eatBlackPiece, moveWhitePiece)
         expect(moveBishop).toEqual(expect.arrayContaining([{
-            value: 30,
+            value: 40,
             from_row: 8,
             from_col: 7,
             to_row: 7,
@@ -104,7 +104,7 @@ describe('Bishop movements', () => {
     test('Debe tener al menos un movimiento hacia una celda vacia arriba a la izquierda.', async () => {
         const moveBishop = await bishop(board2, 8, 7, whitePieces, eatBlackPiece, moveWhitePiece)
         expect(moveBishop).toEqual(expect.arrayContaining([{
-            value: 30,
+            value: 40,
             from_row: 8,
             from_col: 7,
             to_row: 7,
@@ -114,7 +114,7 @@ describe('Bishop movements', () => {
     test('Debe tener al menos un movimiento hacia una celda vacia abajo a la derecha.', async () => {
         const moveBishop = await bishop(board2, 8, 7, whitePieces, eatBlackPiece, moveWhitePiece)
         expect(moveBishop).toEqual(expect.arrayContaining([{
-            value: 30,
+            value: 40,
             from_row: 8,
             from_col: 7,
             to_row: 9,
@@ -124,7 +124,7 @@ describe('Bishop movements', () => {
     test('Debe tener al menos un movimiento hacia una celda vacia abajo a la izquierda.', async () => {
         const moveBishop = await bishop(board2, 8, 7, whitePieces, eatBlackPiece, moveWhitePiece)
         expect(moveBishop).toEqual(expect.arrayContaining([{
-            value: 30,
+            value: 40,
             from_row: 8,
             from_col: 7,
             to_row: 9,

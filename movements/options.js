@@ -23,9 +23,7 @@ const decideAction = (data) => {
                         })
                         .catch(err => reject(err))
                     console.log(data.data)
-
-                }
-                if (data.data.actual_turn === 'black') {
+                } else {
                     blackMovements(data)
                         .then(movement => {
                             resolve(movement)
@@ -34,12 +32,15 @@ const decideAction = (data) => {
                     console.log(data.data)
                 }
                 break;
+
             case 'gameover':
                 console.log(data)
                 break;
+
             case 'update_user_list':
                 console.log(data)
                 break;
+                
             default:
                 console.log('No se encontro la opción.')
                 break;
