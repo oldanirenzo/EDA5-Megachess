@@ -1,6 +1,10 @@
+const { whiteKingPositionValue, blackKingPositionValue } = require("../piecesValues/positionValue");
+
 const king = async (board, from_row, from_col, sameColor, eatPiece, movePiece) => {
 
     let kingMovements = [];
+    let positionValue;
+    sameColor.includes('K') ? positionValue = whiteKingPositionValue : positionValue = blackKingPositionValue;
 
     // MOVIMIENTO DEL REY
     for (let row = -1; row < 2; row++) {
@@ -15,7 +19,7 @@ const king = async (board, from_row, from_col, sameColor, eatPiece, movePiece) =
 
             if (' '.includes(board[from_row + row][from_col + col])) {
                 kingMovements.push({
-                    value: movePiece[board[from_row][from_col]],
+                    value: movePiece[board[from_row][from_col]] * positionValue[from_row + row][from_col + col],
                     from_row: from_row,
                     from_col: from_col,
                     to_row: from_row + row,
@@ -23,7 +27,7 @@ const king = async (board, from_row, from_col, sameColor, eatPiece, movePiece) =
                 })
             } else {
                 kingMovements.push({
-                    value: eatPiece[board[from_row + row][from_col + col]],
+                    value: eatPiece[board[from_row + row][from_col + col]] + positionValue[from_row + row][from_col + col],
                     from_row: from_row,
                     from_col: from_col,
                     to_row: from_row + row,

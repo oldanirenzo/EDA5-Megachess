@@ -1,5 +1,10 @@
+const { blackQueenPositionValue, whiteQueenPositionValue } = require("../piecesValues/positionValue");
+
 const queen = async (board, from_row, from_col, sameColor, eatPiece, movePiece) => {
     let queenMovements = []
+
+    let positionValue;
+    sameColor.includes('B') ? positionValue = whiteQueenPositionValue : positionValue = blackQueenPositionValue;
     // MOVIMIENTO VERTICAL HACIA ARRIBA
     verticalArriba: for (let row = from_row - 1; row > -1; row--) {
 
@@ -9,7 +14,7 @@ const queen = async (board, from_row, from_col, sameColor, eatPiece, movePiece) 
         // Guarda en el array cualquier movimiento hacia un espacio vacio hacia arriba.
         if (' '.includes(board[row][from_col])) {
             queenMovements.push({
-                value: movePiece[board[from_row][from_col]],
+                value: movePiece[board[from_row][from_col]] * positionValue[row][from_col],
                 from_row: from_row,
                 from_col: from_col,
                 to_row: row,
@@ -17,7 +22,7 @@ const queen = async (board, from_row, from_col, sameColor, eatPiece, movePiece) 
             })
         } else {
             queenMovements.push({
-                value: eatPiece[board[row][from_col]],
+                value: eatPiece[board[row][from_col]] + positionValue[row][from_col],
                 from_row: from_row,
                 from_col: from_col,
                 to_row: row,
@@ -35,7 +40,7 @@ const queen = async (board, from_row, from_col, sameColor, eatPiece, movePiece) 
         }
         if (' '.includes(board[row][from_col])) {
             queenMovements.push({
-                value: movePiece[board[from_row][from_col]],
+                value: movePiece[board[from_row][from_col]] * positionValue[row][from_col],
                 from_row: from_row,
                 from_col: from_col,
                 to_row: row,
@@ -43,7 +48,7 @@ const queen = async (board, from_row, from_col, sameColor, eatPiece, movePiece) 
             })
         } else {
             queenMovements.push({
-                value: eatPiece[board[row][from_col]],
+                value: eatPiece[board[row][from_col]] + positionValue[row][from_col],
                 from_row: from_row,
                 from_col: from_col,
                 to_row: row,
@@ -60,7 +65,7 @@ const queen = async (board, from_row, from_col, sameColor, eatPiece, movePiece) 
         }
         if (' '.includes(board[from_row][col])) {
             queenMovements.push({
-                value: movePiece[board[from_row][from_col]],
+                value: movePiece[board[from_row][from_col]] * positionValue[from_row][col],
                 from_row: from_row,
                 from_col: from_col,
                 to_row: from_row,
@@ -68,7 +73,7 @@ const queen = async (board, from_row, from_col, sameColor, eatPiece, movePiece) 
             })
         } else {
             queenMovements.push({
-                value: eatPiece[board[from_row][col]],
+                value: eatPiece[board[from_row][col]] + positionValue[from_row][col],
                 from_row: from_row,
                 from_col: from_col,
                 to_row: from_row,
@@ -87,7 +92,7 @@ const queen = async (board, from_row, from_col, sameColor, eatPiece, movePiece) 
 
         if (' '.includes(board[from_row][col])) {
             queenMovements.push({
-                value: movePiece[board[from_row][from_col]],
+                value: movePiece[board[from_row][from_col]] * positionValue[from_row][col],
                 from_row: from_row,
                 from_col: from_col,
                 to_row: from_row,
@@ -95,7 +100,7 @@ const queen = async (board, from_row, from_col, sameColor, eatPiece, movePiece) 
             })
         } else {
             queenMovements.push({
-                value: eatPiece[board[from_row][col]],
+                value: eatPiece[board[from_row][col]] + positionValue[from_row][col],
                 from_row: from_row,
                 from_col: from_col,
                 to_row: from_row,
@@ -118,7 +123,7 @@ const queen = async (board, from_row, from_col, sameColor, eatPiece, movePiece) 
 
         if (' '.includes(board[from_row - x][from_col + x])) {
             queenMovements.push({
-                value: movePiece[board[from_row][from_col]],
+                value: movePiece[board[from_row][from_col]] * positionValue[from_row - x][from_col + x],
                 from_row: from_row,
                 from_col: from_col,
                 to_row: from_row - x,
@@ -126,7 +131,7 @@ const queen = async (board, from_row, from_col, sameColor, eatPiece, movePiece) 
             })
         } else {
             queenMovements.push({
-                value: eatPiece[board[from_row - x][from_col + x]],
+                value: eatPiece[board[from_row - x][from_col + x]] + positionValue[from_row - x][from_col + x],
                 from_row: from_row,
                 from_col: from_col,
                 to_row: from_row - x,
@@ -151,7 +156,7 @@ const queen = async (board, from_row, from_col, sameColor, eatPiece, movePiece) 
 
         if (' '.includes(board[from_row - y][from_col - y])) {
             queenMovements.push({
-                value: movePiece[board[from_row][from_col]],
+                value: movePiece[board[from_row][from_col]] * positionValue[from_row - y][from_col - y],
                 from_row: from_row,
                 from_col: from_col,
                 to_row: from_row - y,
@@ -159,7 +164,7 @@ const queen = async (board, from_row, from_col, sameColor, eatPiece, movePiece) 
             })
         } else {
             queenMovements.push({
-                value: eatPiece[board[from_row - y][from_col - y]],
+                value: eatPiece[board[from_row - y][from_col - y]] + positionValue[from_row - y][from_col - y],
                 from_row: from_row,
                 from_col: from_col,
                 to_row: from_row - y,
@@ -184,7 +189,7 @@ const queen = async (board, from_row, from_col, sameColor, eatPiece, movePiece) 
 
         if (' '.includes(board[from_row + x][from_col - x])) {
             queenMovements.push({
-                value: movePiece[board[from_row][from_col]],
+                value: movePiece[board[from_row][from_col]] * positionValue[from_row + x][from_col - x],
                 from_row: from_row,
                 from_col: from_col,
                 to_row: from_row + x,
@@ -193,7 +198,7 @@ const queen = async (board, from_row, from_col, sameColor, eatPiece, movePiece) 
         } else {
 
             queenMovements.push({
-                value: eatPiece[board[from_row + x][from_col - x]],
+                value: eatPiece[board[from_row + x][from_col - x]] + positionValue[from_row + x][from_col - x],
                 from_row: from_row,
                 from_col: from_col,
                 to_row: from_row + x,
@@ -218,7 +223,7 @@ const queen = async (board, from_row, from_col, sameColor, eatPiece, movePiece) 
 
         if (' '.includes(board[from_row + y][from_col + y])) {
             queenMovements.push({
-                value: movePiece[board[from_row][from_col]],
+                value: movePiece[board[from_row][from_col]] * positionValue[from_row + y][from_col + y],
                 from_row: from_row,
                 from_col: from_col,
                 to_row: from_row + y,
@@ -226,7 +231,7 @@ const queen = async (board, from_row, from_col, sameColor, eatPiece, movePiece) 
             })
         } else {
             queenMovements.push({
-                value: eatPiece[board[from_row + y][from_col + y]],
+                value: eatPiece[board[from_row + y][from_col + y]] + positionValue[from_row + y][from_col + y],
                 from_row: from_row,
                 from_col: from_col,
                 to_row: from_row + y,

@@ -1,6 +1,11 @@
+const { whiteHorsePositionValue, blackHorsePositionValue } = require("../piecesValues/positionValue");
+
 const horse = async (board, from_row, from_col, sameColor, eatPiece, movePiece) => {
 
+
     let horseMovements = []
+    let positionValue;
+    sameColor.includes('H') ? positionValue = whiteHorsePositionValue : positionValue = blackHorsePositionValue;
 
     // 2 HACIA LOS LADOS Y 1 HACIA ARRIBA Y ABAJO
     for (let x = -2; x < 3; x += 4) {
@@ -13,7 +18,7 @@ const horse = async (board, from_row, from_col, sameColor, eatPiece, movePiece) 
             }
             if (' '.includes(board[from_row + x][from_col + y])) {
                 horseMovements.push({
-                    value: movePiece[board[from_row][from_col]],
+                    value: (movePiece[board[from_row][from_col]] * positionValue[from_row + x][from_col + y]),
                     from_row: from_row,
                     from_col: from_col,
                     to_row: from_row + x,
@@ -21,7 +26,7 @@ const horse = async (board, from_row, from_col, sameColor, eatPiece, movePiece) 
                 })
             } else {
                 horseMovements.push({
-                    value: eatPiece[board[from_row + x][from_col + y]],
+                    value: (eatPiece[board[from_row + x][from_col + y]] + positionValue[from_row + x][from_col + y]),
                     from_row: from_row,
                     from_col: from_col,
                     to_row: from_row + x,
@@ -42,7 +47,7 @@ const horse = async (board, from_row, from_col, sameColor, eatPiece, movePiece) 
             }
             if (' '.includes(board[from_row + x][from_col + y])) {
                 horseMovements.push({
-                    value: movePiece[board[from_row][from_col]],
+                    value: (movePiece[board[from_row][from_col]] * positionValue[from_row + x][from_col + y]),
                     from_row: from_row,
                     from_col: from_col,
                     to_row: from_row + x,
@@ -50,7 +55,7 @@ const horse = async (board, from_row, from_col, sameColor, eatPiece, movePiece) 
                 })
             } else {
                 horseMovements.push({
-                    value: eatPiece[board[from_row + x][from_col + y]],
+                    value: (eatPiece[board[from_row + x][from_col + y]] + positionValue[from_row + x][from_col + y]),
                     from_row: from_row,
                     from_col: from_col,
                     to_row: from_row + x,

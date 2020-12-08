@@ -1,7 +1,11 @@
+const { whiteRookPositionValue, blackRookPositionValue } = require("../piecesValues/positionValue");
 
 const rook = async (board, from_row, from_col, sameColor, eatPiece, movePiece) => {
 
     let rookMovements = []
+    let positionValue;
+    sameColor.includes('R') ? positionValue = whiteRookPositionValue : positionValue = blackRookPositionValue;
+
     // MOVIMIENTO VERTICAL HACIA ARRIBA
     verticalArriba: for (let row = from_row - 1; row > -1; row--) {
 
@@ -11,7 +15,7 @@ const rook = async (board, from_row, from_col, sameColor, eatPiece, movePiece) =
 
         if (' '.includes(board[row][from_col])) {
             rookMovements.push({
-                value: movePiece[board[from_row][from_col]],
+                value: movePiece[board[from_row][from_col]] * positionValue[row][from_col],
                 from_row: from_row,
                 from_col: from_col,
                 to_row: row,
@@ -19,7 +23,7 @@ const rook = async (board, from_row, from_col, sameColor, eatPiece, movePiece) =
             })
         } else {
             rookMovements.push({
-                value: eatPiece[board[row][from_col]],
+                value: eatPiece[board[row][from_col]] + positionValue[row][from_col],
                 from_row: from_row,
                 from_col: from_col,
                 to_row: row,
@@ -39,7 +43,7 @@ const rook = async (board, from_row, from_col, sameColor, eatPiece, movePiece) =
 
         if (' '.includes(board[row][from_col])) {
             rookMovements.push({
-                value: movePiece[board[from_row][from_col]],
+                value: movePiece[board[from_row][from_col]] * positionValue[row][from_col],
                 from_row: from_row,
                 from_col: from_col,
                 to_row: row,
@@ -47,7 +51,7 @@ const rook = async (board, from_row, from_col, sameColor, eatPiece, movePiece) =
             })
         } else {
             rookMovements.push({
-                value: eatPiece[board[row][from_col]],
+                value: eatPiece[board[row][from_col]] + positionValue[row][from_col],
                 from_row: from_row,
                 from_col: from_col,
                 to_row: row,
@@ -64,7 +68,7 @@ const rook = async (board, from_row, from_col, sameColor, eatPiece, movePiece) =
 
         if (' '.includes(board[from_row][col])) {
             rookMovements.push({
-                value: movePiece[board[from_row][from_col]],
+                value: movePiece[board[from_row][from_col]] * positionValue[from_row][col],
                 from_row: from_row,
                 from_col: from_col,
                 to_row: from_row,
@@ -72,7 +76,7 @@ const rook = async (board, from_row, from_col, sameColor, eatPiece, movePiece) =
             })
         } else {
             rookMovements.push({
-                value: eatPiece[board[from_row][col]],
+                value: eatPiece[board[from_row][col]] + positionValue[from_row][col],
                 from_row: from_row,
                 from_col: from_col,
                 to_row: from_row,
@@ -91,7 +95,7 @@ const rook = async (board, from_row, from_col, sameColor, eatPiece, movePiece) =
 
         if (' '.includes(board[from_row][col])) {
             rookMovements.push({
-                value: movePiece[board[from_row][from_col]],
+                value: movePiece[board[from_row][from_col]] * positionValue[from_row][col],
                 from_row: from_row,
                 from_col: from_col,
                 to_row: from_row,
@@ -99,7 +103,7 @@ const rook = async (board, from_row, from_col, sameColor, eatPiece, movePiece) =
             })
         } else {
             rookMovements.push({
-                value: eatPiece[board[from_row][col]],
+                value: eatPiece[board[from_row][col]] + positionValue[from_row][col],
                 from_row: from_row,
                 from_col: from_col,
                 to_row: from_row,

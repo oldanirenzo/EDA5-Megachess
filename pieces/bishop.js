@@ -1,6 +1,10 @@
+const { whiteBishopPositionValue, blackBishopPositionValue } = require("../piecesValues/positionValue");
+
 const bishop = async (board, from_row, from_col, sameColor, eatPiece, movePiece) => {
 
     let bishopMovements = [];
+    let positionValue;
+    sameColor.includes('B') ? positionValue = whiteBishopPositionValue : positionValue = blackBishopPositionValue;
 
     // MOVIMIENTO DIAGONAL ARRIBA A LA DERECHA
     diagonalArribaDerecha: for (let x = 1; x < 16; x++) {
@@ -15,7 +19,7 @@ const bishop = async (board, from_row, from_col, sameColor, eatPiece, movePiece)
 
         if (' '.includes(board[from_row - x][from_col + x])) {
             bishopMovements.push({
-                value: movePiece[board[from_row][from_col]],
+                value: movePiece[board[from_row][from_col]] * positionValue[from_row - x][from_col + x],
                 from_row: from_row,
                 from_col: from_col,
                 to_row: from_row - x,
@@ -23,7 +27,7 @@ const bishop = async (board, from_row, from_col, sameColor, eatPiece, movePiece)
             })
         } else {
             bishopMovements.push({
-                value: eatPiece[board[from_row - x][from_col + x]],
+                value: eatPiece[board[from_row - x][from_col + x]] + positionValue[from_row - x][from_col + x],
                 from_row: from_row,
                 from_col: from_col,
                 to_row: from_row - x,
@@ -46,7 +50,7 @@ const bishop = async (board, from_row, from_col, sameColor, eatPiece, movePiece)
 
         if (' '.includes(board[from_row - y][from_col - y])) {
             bishopMovements.push({
-                value: movePiece[board[from_row][from_col]],
+                value: movePiece[board[from_row][from_col]] * positionValue[from_row - y][from_col - y],
                 from_row: from_row,
                 from_col: from_col,
                 to_row: from_row - y,
@@ -54,7 +58,7 @@ const bishop = async (board, from_row, from_col, sameColor, eatPiece, movePiece)
             })
         } else {
             bishopMovements.push({
-                value: eatPiece[board[from_row - y][from_col - y]],
+                value: eatPiece[board[from_row - y][from_col - y]] + positionValue[from_row - y][from_col - y],
                 from_row: from_row,
                 from_col: from_col,
                 to_row: from_row - y,
@@ -79,7 +83,7 @@ const bishop = async (board, from_row, from_col, sameColor, eatPiece, movePiece)
 
         if (' '.includes(board[from_row + x][from_col - x])) {
             bishopMovements.push({
-                value: movePiece[board[from_row][from_col]],
+                value: movePiece[board[from_row][from_col]] * positionValue[from_row + x][from_col - x],
                 from_row: from_row,
                 from_col: from_col,
                 to_row: from_row + x,
@@ -88,7 +92,7 @@ const bishop = async (board, from_row, from_col, sameColor, eatPiece, movePiece)
         } else {
 
             bishopMovements.push({
-                value: eatPiece[board[from_row + x][from_col - x]],
+                value: eatPiece[board[from_row + x][from_col - x]] + positionValue[from_row + x][from_col - x],
                 from_row: from_row,
                 from_col: from_col,
                 to_row: from_row + x,
@@ -113,7 +117,7 @@ const bishop = async (board, from_row, from_col, sameColor, eatPiece, movePiece)
 
         if (' '.includes(board[from_row + y][from_col + y])) {
             bishopMovements.push({
-                value: movePiece[board[from_row][from_col]],
+                value: movePiece[board[from_row][from_col]] * positionValue[from_row + y][from_col + y],
                 from_row: from_row,
                 from_col: from_col,
                 to_row: from_row + y,
@@ -122,7 +126,7 @@ const bishop = async (board, from_row, from_col, sameColor, eatPiece, movePiece)
         } else {
 
             bishopMovements.push({
-                value: eatPiece[board[from_row + y][from_col + y]],
+                value: eatPiece[board[from_row + y][from_col + y]] + positionValue[from_row + y][from_col + y],
                 from_row: from_row,
                 from_col: from_col,
                 to_row: from_row + y,
