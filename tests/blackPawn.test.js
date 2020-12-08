@@ -69,7 +69,7 @@ describe('Black pawn movement', () => {
     test('Debe poseer un movimiento 1 fila hacia adelante.', async () => {
         const moveBlackPawn = await blackPawn(board1, 3, 0, eatWhitePiece);
         expect(moveBlackPawn).toEqual(expect.arrayContaining([{
-            value: 53,
+            value: 5,
             from_row: 3,
             from_col: 0,
             to_row: 4,
@@ -80,7 +80,7 @@ describe('Black pawn movement', () => {
     test('Debe poseer un movimiento 2 fila hacia adelante.', async () => {
         const moveBlackPawn = await blackPawn(board1, 3, 0, eatWhitePiece);
         expect(moveBlackPawn).toEqual(expect.arrayContaining([{
-            value: 53,
+            value: 50,
             from_row: 3,
             from_col: 0,
             to_row: 5,
@@ -102,7 +102,7 @@ describe('Black pawn movement', () => {
     test('Debe poseer un movimiento 1 fila hacia adelante.', async () => {
         const moveBlackPawn = await blackPawn(board2, 6, 7, eatWhitePiece);
         expect(moveBlackPawn).toEqual(expect.arrayContaining([{
-            value: 200,
+            value: 1500,
             from_row: 6,
             from_col: 7,
             to_row: 7,
@@ -124,7 +124,7 @@ describe('Black pawn movement', () => {
     test('Debe poseer un movimiento 1 fila hacia adelante a la izquierda.', async () => {
         const moveBlackPawn = await blackPawn(board3, 5, 4, eatWhitePiece);
         expect(moveBlackPawn).toEqual(expect.arrayContaining([{
-            value: 350,
+            value: 875,
             from_row: 5,
             from_col: 4,
             to_row: 6,
@@ -135,7 +135,7 @@ describe('Black pawn movement', () => {
     test('Debe poseer un movimiento 1 fila hacia adelante a la derecha.', async () => {
         const moveBlackPawn = await blackPawn(board3, 5, 4, eatWhitePiece);
         expect(moveBlackPawn).toEqual(expect.arrayContaining([{
-            value: 350,
+            value: 875,
             from_row: 5,
             from_col: 4,
             to_row: 6,
