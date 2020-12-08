@@ -36,9 +36,9 @@ describe('Piezas negras, Movimientos', () => {
                     board_id: '9294de41-a6e8-4dc1-be6e-0b4310a8f274',
                     turn_token: '2a7ed463-8419-4dce-87a7-2490c0ad9d33',
                     from_row: 3,
-                    from_col: 0,
+                    from_col: 5,
                     to_row: 5,
-                    to_col: 0,
+                    to_col: 5,
                 }
             })
         })
@@ -71,10 +71,10 @@ describe('Piezas negras, Movimientos', () => {
                 data: {
                     board_id: '9294de41-a6e8-4dc1-be6e-0b4310a8f274',
                     turn_token: '2a7ed463-8419-4dce-87a7-2490c0ad9d33',
-                    from_row: 5,
-                    from_col: 15,
-                    to_row: 12,
-                    to_col: 15,
+                    from_row: 3,
+                    from_col: 5,
+                    to_row: 5,
+                    to_col: 5,
                 }
             })
         })

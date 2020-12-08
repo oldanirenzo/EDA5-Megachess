@@ -80,7 +80,7 @@ describe('Rook movements', () => {
     test('Debe poseer un movimiento hacia una celda vacia arriba', async () => {
         const moveRook = await (rook(board2, 8, 7, whitePieces, eatBlackPiece, moveWhitePiece))
         expect(moveRook).toEqual(expect.arrayContaining([{
-            value: 40,
+            value: 0,
             from_row: 8,
             from_col: 7,
             to_row: 7,
@@ -91,7 +91,7 @@ describe('Rook movements', () => {
     test('Debe poseer un movimiento hacia una celda vacia a la izquierda', async () => {
         const moveRook = await (rook(board2, 8, 7, whitePieces, eatBlackPiece, moveWhitePiece))
         expect(moveRook).toEqual(expect.arrayContaining([{
-            value: 40,
+            value: 0,
             from_row: 8,
             from_col: 7,
             to_row: 8,
@@ -102,7 +102,7 @@ describe('Rook movements', () => {
     test('Debe poseer un movimiento hacia una celda vacia abajo', async () => {
         const moveRook = await (rook(board2, 8, 7, whitePieces, eatBlackPiece, moveWhitePiece))
         expect(moveRook).toEqual(expect.arrayContaining([{
-            value: 40,
+            value: 0,
             from_row: 8,
             from_col: 7,
             to_row: 9,
@@ -113,7 +113,7 @@ describe('Rook movements', () => {
     test('Debe poseer un movimiento hacia una celda vacia a la derecha', async () => {
         const moveRook = await (rook(board2, 8, 7, whitePieces, eatBlackPiece, moveWhitePiece))
         expect(moveRook).toEqual(expect.arrayContaining([{
-            value: 40,
+            value: 0,
             from_row: 8,
             from_col: 7,
             to_row: 8,
