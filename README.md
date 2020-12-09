@@ -3,3 +3,9 @@
 [![Build Status](https://travis-ci.com/oldanirenzo/Megachess-Eventbrite.svg?branch=master)](https://travis-ci.com/oldanirenzo/Megachess-Eventbrite)
 
 # Megachess for EDA Talent Show
+
+## Developed by Oldani Renzo
+
+## About
+
+    Bot to play chess in a 16x16 board, making use of WebSocket
