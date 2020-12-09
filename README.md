@@ -8,4 +8,4 @@
 
 ## About
 
-    Bot to play chess in a 16x16 board, making use of WebSocket
+    Bot to play chess in a 16x16 board, using WebSocket.
