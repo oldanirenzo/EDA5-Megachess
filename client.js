@@ -1,5 +1,5 @@
 require('./config/config.js')
-const decideAction = require('./movements/options.js');
+const decideAction = require('./responses/options.js');
 const WebSocketClient = require('websocket').client;
 
 let client = new WebSocketClient();
