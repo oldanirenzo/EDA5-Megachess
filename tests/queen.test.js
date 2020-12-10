@@ -225,7 +225,7 @@ describe('Queen movements', () => {
     test('Debe poseer un movimiento para comer hacia la derecha.', async () => {
         const queenMovement = await queen(board3, 8, 7, whitePieces, eatBlackPiece, moveWhitePiece);
         expect(queenMovement).toEqual(expect.arrayContaining([{
-            value: 351,
+            value: 451,
             from_row: 8,
             from_col: 7,
             to_row: 8,

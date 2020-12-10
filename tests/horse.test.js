@@ -168,7 +168,7 @@ describe('Horse movements', () => {
     test('Debe poseer un movimiento para comer 2 filas arriba y 1 columna a la derecha.', async () => {
         const horseMovement = await horse(board3, 8, 7, whitePieces, eatBlackPiece, moveWhitePiece);
         expect(horseMovement).toEqual(expect.arrayContaining([{
-            value: 352,
+            value: 452,
             from_row: 8,
             from_col: 7,
             to_row: 6,
