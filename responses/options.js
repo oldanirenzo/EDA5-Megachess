@@ -1,8 +1,6 @@
 const acceptChallenge = require("../challenge/acceptChallenge")
-// const { blackMovements } = require("../movements/black")
-const matriz = require("../movements/matriz")
-const { whiteMovements, blackMovements } = require("../movements/movimientos")
-// const { whiteMovements } = require("../movements/movimientos")
+const { blackMovements } = require("../movements/black")
+const { whiteMovements } = require("../movements/white")
 
 
 const decideAction = (data) => {
@@ -20,39 +18,19 @@ const decideAction = (data) => {
 
             case 'your_turn':
                 if (data.data.actual_turn === 'white') {
-                    whiteMovements(matriz(data))
+                    (whiteMovements(data))
                         .then(movement => {
-                            resolve({
-                                action: 'move',
-                                data: {
-                                    board_id: data.data.board_id,
-                                    turn_token: data.data.turn_token,
-                                    from_row: movement.from_row,
-                                    from_col: movement.from_col,
-                                    to_row: movement.to_row,
-                                    to_col: movement.to_col,
-                                }
-                            })
+                            resolve(movement)
                         })
                         .catch(err => reject(err))
                     console.log(data.data)
                 } else {
-                    blackMovements(matriz(data))
-                        .then(movement => {
-                            resolve({
-                                action: 'move',
-                                data: {
-                                    board_id: data.data.board_id,
-                                    turn_token: data.data.turn_token,
-                                    from_row: movement.from_row,
-                                    from_col: movement.from_col,
-                                    to_row: movement.to_row,
-                                    to_col: movement.to_col,
-                                }
-                            })
-                        })
-                        .catch(err => reject(err))
-                    console.log(data.data)
+                    blackMovements(data)
+                    .then(movement => {
+                        resolve(movement)
+                    })
+                    .catch(err => reject(err))
+                console.log(data.data)
                 }
                 break;
 
