@@ -10,7 +10,7 @@ const blackPawn = async (board, from_row, from_col, eatPiece) => {
             if (from_row === 2 || from_row === 3) {
                 pawnMovements.push({
 
-                    value: 50 * blackPawnPositionValue[from_row + 2][from_col], // Asigno un valor a cada casilla del tablero, para mejorar el posicionamiento.
+                    value: 10 * blackPawnPositionValue[from_row + 2][from_col], // Asigno un valor a cada casilla del tablero, para mejorar el posicionamiento.
                     from_row: from_row,
                     from_col: from_col,
                     to_row: from_row + 2,
@@ -50,7 +50,7 @@ const blackPawn = async (board, from_row, from_col, eatPiece) => {
             })
         }
         pawnMovements.push({
-            value: 50 * blackPawnPositionValue[from_row + 1][from_col],
+            value: 10 * blackPawnPositionValue[from_row + 1][from_col],
             from_row: from_row,
             from_col: from_col,
             to_row: from_row + 1,
