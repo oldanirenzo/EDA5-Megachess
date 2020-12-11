@@ -69,7 +69,7 @@ describe('Rook movements', () => {
     test('Debe poseer un movimiento para comer un peon', async () => {
         const moveRook = await (rook(board2, 8, 7, whitePieces, eatBlackPiece, moveWhitePiece))
         expect(moveRook).toEqual(expect.arrayContaining([{
-            value: 100,
+            value: 120,
             from_row: 8,
             from_col: 7,
             to_row: 3,
@@ -135,7 +135,7 @@ describe('Rook movements', () => {
     test('Debe poseer un movimiento para comer hacia arriba', async () => {
         const moveRook = await (rook(board3, 8, 7, whitePieces, eatBlackPiece, moveWhitePiece))
         expect(moveRook).toEqual(expect.arrayContaining([{
-            value: 100,
+            value: 120,
             from_row: 8,
             from_col: 7,
             to_row: 7,
@@ -146,7 +146,7 @@ describe('Rook movements', () => {
     test('Debe poseer un movimiento para comer hacia la izquierda', async () => {
         const moveRook = await (rook(board3, 8, 7, whitePieces, eatBlackPiece, moveWhitePiece))
         expect(moveRook).toEqual(expect.arrayContaining([{
-            value: 100,
+            value: 120,
             from_row: 8,
             from_col: 7,
             to_row: 8,

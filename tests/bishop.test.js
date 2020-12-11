@@ -135,7 +135,7 @@ describe('Bishop movements', () => {
     test('Debe tener un movimiento para comer hacia arriba a la derecha.', async () => {
         const moveBishop = await bishop(board3, 8, 7, whitePieces, eatBlackPiece, moveWhitePiece);
         expect(moveBishop).toEqual(expect.arrayContaining([{
-            value: 101,
+            value: 121,
             from_row: 8,
             from_col: 7,
             to_row: 7,
@@ -146,7 +146,7 @@ describe('Bishop movements', () => {
     test('Debe tener un movimiento para comer hacia arriba a la izquierda.', async () => {
         const moveBishop = await bishop(board3, 8, 7, whitePieces, eatBlackPiece, moveWhitePiece)
         expect(moveBishop).toEqual(expect.arrayContaining([{
-            value: 101,
+            value: 121,
             from_row: 8,
             from_col: 7,
             to_row: 7,
