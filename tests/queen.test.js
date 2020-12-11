@@ -43,12 +43,12 @@ let board2 = [
 let board3 = [
     ['r', 'r', 'h', 'h', 'b', ' ', 'q', 'q', 'k', 'k', 'b', 'b', 'h', 'h', 'r', 'r'],
     ['r', 'r', 'h', 'h', 'b', 'b', ' ', 'q', ' ', 'k', 'b', 'b', 'h', ' ', ' ', 'r'],
-    ['p', 'p', 'p', 'p', 'p', 'p', 'p', ' ', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'],
-    ['p', 'p', 'p', 'p', 'p', 'p', ' ', ' ', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'],
+    ['p', 'p', 'p', 'p', 'p', 'p', 'p', ' ', 'p', 'p', ' ', 'p', ' ', 'p', 'p', 'p'],
+    ['p', 'p', 'p', 'p', 'p', 'p', ' ', ' ', 'p', 'p', ' ', ' ', ' ', 'p', 'p', 'p'],
     [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
     [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-    [' ', ' ', ' ', ' ', ' ', ' ', 'p', 'p', 'p', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'p', 'Q', 'p', ' ', ' ', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', 'p', 'p', 'p', ' ', 'p', 'p', 'p', ' ', ' ', ' '],
     [' ', ' ', ' ', ' ', ' ', ' ', 'k', 'Q', 'q', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
     [' ', ' ', ' ', ' ', ' ', ' ', 'h', 'b', 'r', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
     [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
@@ -56,7 +56,7 @@ let board3 = [
     ['P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'],
     ['P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'],
     ['R', 'R', 'H', 'H', 'B', 'B', 'Q', ' ', 'K', 'K', 'B', 'B', 'H', 'H', 'R', 'R'],
-    ['R', 'R', 'H', 'H', 'B', 'B', 'Q', 'Q', 'K', 'K', 'B', 'B', 'H', 'H', 'R', 'R'],
+    ['R', 'R', 'H', 'H', 'B', 'B', 'Q', ' ', 'K', 'K', 'B', 'B', 'H', 'H', 'R', 'R'],
 ]
 
 describe('Queen movements', () => {
@@ -66,7 +66,7 @@ describe('Queen movements', () => {
     });
 
     // MOVIMIENTOS
-    
+
     test('Debe poseer al menos un movimiento hacia alguna celda vacia hacia arriba.', async () => {
         const queenMovement = await queen(board2, 8, 7, whitePieces, eatBlackPiece, moveWhitePiece);
         expect(queenMovement).toEqual(expect.arrayContaining([{
@@ -74,7 +74,7 @@ describe('Queen movements', () => {
             from_row: 8,
             from_col: 7,
             to_row: 6,
-            to_col: 7
+            to_col: 7,
         }]))
     });
 
@@ -85,7 +85,7 @@ describe('Queen movements', () => {
             from_row: 8,
             from_col: 7,
             to_row: 6,
-            to_col: 5
+            to_col: 5,
         }]))
     });
     test('Debe poseer al menos un movimiento hacia alguna celda vacia hacia la izquierda.', async () => {
@@ -95,7 +95,7 @@ describe('Queen movements', () => {
             from_row: 8,
             from_col: 7,
             to_row: 8,
-            to_col: 5
+            to_col: 5,
         }]))
     });
 
@@ -106,7 +106,7 @@ describe('Queen movements', () => {
             from_row: 8,
             from_col: 7,
             to_row: 10,
-            to_col: 5
+            to_col: 5,
         }]))
     });
 
@@ -117,7 +117,7 @@ describe('Queen movements', () => {
             from_row: 8,
             from_col: 7,
             to_row: 10,
-            to_col: 7
+            to_col: 7,
         }]))
     });
 
@@ -128,7 +128,7 @@ describe('Queen movements', () => {
             from_row: 8,
             from_col: 7,
             to_row: 10,
-            to_col: 9
+            to_col: 9,
         }]))
     });
 
@@ -139,7 +139,7 @@ describe('Queen movements', () => {
             from_row: 8,
             from_col: 7,
             to_row: 8,
-            to_col: 9
+            to_col: 9,
         }]))
     });
 
@@ -150,7 +150,7 @@ describe('Queen movements', () => {
             from_row: 8,
             from_col: 7,
             to_row: 6,
-            to_col: 9
+            to_col: 9,
         }]))
     });
 
@@ -163,7 +163,7 @@ describe('Queen movements', () => {
             from_row: 8,
             from_col: 7,
             to_row: 7,
-            to_col: 7
+            to_col: 7,
         }]))
     });
 
@@ -174,7 +174,7 @@ describe('Queen movements', () => {
             from_row: 8,
             from_col: 7,
             to_row: 7,
-            to_col: 6
+            to_col: 6,
         }]))
     });
 
@@ -185,7 +185,7 @@ describe('Queen movements', () => {
             from_row: 8,
             from_col: 7,
             to_row: 8,
-            to_col: 6
+            to_col: 6,
         }]))
     });
 
@@ -196,7 +196,7 @@ describe('Queen movements', () => {
             from_row: 8,
             from_col: 7,
             to_row: 9,
-            to_col: 6
+            to_col: 6,
         }]))
     });
 
@@ -207,7 +207,7 @@ describe('Queen movements', () => {
             from_row: 8,
             from_col: 7,
             to_row: 9,
-            to_col: 7
+            to_col: 7,
         }]))
     });
 
@@ -218,7 +218,7 @@ describe('Queen movements', () => {
             from_row: 8,
             from_col: 7,
             to_row: 9,
-            to_col: 8
+            to_col: 8,
         }]))
     });
 
@@ -229,7 +229,7 @@ describe('Queen movements', () => {
             from_row: 8,
             from_col: 7,
             to_row: 8,
-            to_col: 8
+            to_col: 8,
         }]))
     });
 
@@ -240,7 +240,61 @@ describe('Queen movements', () => {
             from_row: 8,
             from_col: 7,
             to_row: 7,
-            to_col: 8
+            to_col: 8,
+        }]))
+    });
+
+    test('Debe poseer un movimiento para comer el peon a la derecha.', async () => {
+        const queenMovement = await queen(board3, 6, 11, whitePieces, eatBlackPiece, moveWhitePiece);
+        expect(queenMovement).toEqual(expect.arrayContaining([{
+            value: 400,
+            from_row: 6,
+            from_col: 11,
+            to_row: 6,
+            to_col: 12,
+        }]))
+    });
+
+    test('Debe poseer un movimiento para comer el peon a la izquierda.', async () => {
+        const queenMovement = await queen(board3, 6, 11, whitePieces, eatBlackPiece, moveWhitePiece);
+        expect(queenMovement).toEqual(expect.arrayContaining([{
+            value: 400,
+            from_row: 6,
+            from_col: 11,
+            to_row: 6,
+            to_col: 10,
+        }]))
+    });
+
+    test('Debe poseer un movimiento para comer el peon abajo a la izquierda.', async () => {
+        const queenMovement = await queen(board3, 6, 11, whitePieces, eatBlackPiece, moveWhitePiece);
+        expect(queenMovement).toEqual(expect.arrayContaining([{
+            value: 400,
+            from_row: 6,
+            from_col: 11,
+            to_row: 7,
+            to_col: 10,
+        }]))
+    });
+
+    test('Debe poseer un movimiento para comer el peon abajo.', async () => {
+        const queenMovement = await queen(board3, 6, 11, whitePieces, eatBlackPiece, moveWhitePiece);
+        expect(queenMovement).toEqual(expect.arrayContaining([{
+            value: 400,
+            from_row: 6,
+            from_col: 11,
+            to_row: 7,
+            to_col: 11,
+        }]))
+    });
+    test('Debe poseer un movimiento para comer el peon abajo a la derecha.', async () => {
+        const queenMovement = await queen(board3, 6, 11, whitePieces, eatBlackPiece, moveWhitePiece);
+        expect(queenMovement).toEqual(expect.arrayContaining([{
+            value: 400,
+            from_row: 6,
+            from_col: 11,
+            to_row: 7,
+            to_col: 12,
         }]))
     });
 
