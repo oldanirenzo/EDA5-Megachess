@@ -8,7 +8,6 @@ const matriz = require("./matriz");
 const { moveBlackPiece } = require('../piecesValues/moveValue')
 const { eatWhitePiece } = require('../piecesValues/eatValue')
 
-
 const blackMovements = (data) => {
 
     return new Promise((resolve) => {
@@ -41,10 +40,7 @@ const blackMovements = (data) => {
                     }
                 })
             })
-            .finally(() => {
-                movements = []
-                blackBestMovement = []
-            })
+
     })
 }
 
@@ -54,6 +50,9 @@ const blackPiecesMovements = async (board, sameColor, movementsArray) => {
         for (let col = 0; col < board.length; col++) {
             switch (board[row][col]) {
 
+                case 'q':
+                    movementsArray.push(await queen(board, row, col, sameColor, eatWhitePiece, moveBlackPiece));
+                    break;
                 case 'p':
                     movementsArray.push(await blackPawn(board, row, col, eatWhitePiece));
                     break;
@@ -65,9 +64,6 @@ const blackPiecesMovements = async (board, sameColor, movementsArray) => {
                     break;
                 case 'r':
                     movementsArray.push(await rook(board, row, col, sameColor, eatWhitePiece, moveBlackPiece));
-                    break;
-                case 'q':
-                    movementsArray.push(await queen(board, row, col, sameColor, eatWhitePiece, moveBlackPiece));
                     break;
                 case 'k':
                     movementsArray.push(await king(board, row, col, sameColor, eatWhitePiece, moveBlackPiece));
@@ -85,7 +81,7 @@ const blackPiecesMovements = async (board, sameColor, movementsArray) => {
             allMovements.push(children)
         });
     });
-    
+
     return allMovements;
 }
 

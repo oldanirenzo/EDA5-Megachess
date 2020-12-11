@@ -64,7 +64,7 @@ describe('Piezas blancas, Movimientos.', () => {
             })
     });
 
-    test('Debe mover la reina para comer al peon', () => {
+    test('Debe mover el peon 2 posiciones hacia adelante', () => {
         return whiteMovements(data2)
             .then(movimiento => {
                 expect(movimiento).toStrictEqual({
@@ -72,10 +72,10 @@ describe('Piezas blancas, Movimientos.', () => {
                     data: {
                         board_id: '9294de41-a6e8-4dc1-be6e-0b4310a8f274',
                         turn_token: '2a7ed463-8419-4dce-87a7-2490c0ad9d33',
-                        from_row: 10,
-                        from_col: 12,
-                        to_row: 3,
-                        to_col: 12,
+                        from_row: 12,
+                        from_col: 5,
+                        to_row: 10,
+                        to_col: 5,
                     }
                 })
             })

@@ -2,6 +2,7 @@ const acceptChallenge = require("../challenge/acceptChallenge")
 const { blackMovements } = require("../movements/black")
 const { whiteMovements } = require("../movements/white")
 
+
 const decideAction = (data) => {
     return new Promise((resolve, reject) => {
 
@@ -25,11 +26,11 @@ const decideAction = (data) => {
                     console.log(data.data)
                 } else {
                     blackMovements(data)
-                        .then(movement => {
-                            resolve(movement)
-                        })
-                        .catch(err => reject(err))
-                    console.log(data.data)
+                    .then(movement => {
+                        resolve(movement)
+                    })
+                    .catch(err => reject(err))
+                console.log(data.data)
                 }
                 break;
 
@@ -40,7 +41,7 @@ const decideAction = (data) => {
             case 'update_user_list':
                 console.log(data)
                 break;
-                
+
             default:
                 console.log('No se encontro la opción.')
                 break;

@@ -159,7 +159,7 @@ describe('Queen movements', () => {
     test('Debe poseer un movimiento para comer hacia arriba.', async () => {
         const queenMovement = await queen(board3, 8, 7, whitePieces, eatBlackPiece, moveWhitePiece);
         expect(queenMovement).toEqual(expect.arrayContaining([{
-            value: 101,
+            value: 400,
             from_row: 8,
             from_col: 7,
             to_row: 7,
@@ -170,7 +170,7 @@ describe('Queen movements', () => {
     test('Debe poseer un movimiento para comer hacia arriba a la izquierda.', async () => {
         const queenMovement = await queen(board3, 8, 7, whitePieces, eatBlackPiece, moveWhitePiece);
         expect(queenMovement).toEqual(expect.arrayContaining([{
-            value: 101,
+            value: 400,
             from_row: 8,
             from_col: 7,
             to_row: 7,
@@ -225,7 +225,7 @@ describe('Queen movements', () => {
     test('Debe poseer un movimiento para comer hacia la derecha.', async () => {
         const queenMovement = await queen(board3, 8, 7, whitePieces, eatBlackPiece, moveWhitePiece);
         expect(queenMovement).toEqual(expect.arrayContaining([{
-            value: 451,
+            value: 551,
             from_row: 8,
             from_col: 7,
             to_row: 8,
@@ -236,7 +236,7 @@ describe('Queen movements', () => {
     test('Debe poseer un movimiento para comer hacia arriba a la derecha.', async () => {
         const queenMovement = await queen(board3, 8, 7, whitePieces, eatBlackPiece, moveWhitePiece);
         expect(queenMovement).toEqual(expect.arrayContaining([{
-            value: 101,
+            value: 400,
             from_row: 8,
             from_col: 7,
             to_row: 7,

@@ -66,7 +66,7 @@ describe('White pawn movement', () => {
     test('Debe poseer un movimiento 1 fila hacia adelante.', async () => {
         const moveWhitePawn = await whitePawn(board1, 12, 0, eatBlackPiece);
         expect(moveWhitePawn).toEqual(expect.arrayContaining([{
-            value: 25,
+            value: 110,
             from_row: 12,
             from_col: 0,
             to_row: 11,
@@ -77,7 +77,7 @@ describe('White pawn movement', () => {
     test('Debe poseer un movimiento 2 filas hacia adelante.', async () => {
         const moveWhitePawn = await whitePawn(board1, 12, 0, eatBlackPiece);
         expect(moveWhitePawn).toEqual(expect.arrayContaining([{
-            value: 50,
+            value: 130,
             from_row: 12,
             from_col: 0,
             to_row: 10,
@@ -99,7 +99,7 @@ describe('White pawn movement', () => {
     test('Debe poseer un movimiento 1 fila hacia adelante.', async () => {
         const moveWhitePawn = await whitePawn(board2, 9, 7, eatBlackPiece);
         expect(moveWhitePawn).toEqual(expect.arrayContaining([{
-            value: 1500,
+            value: 10000,
             from_row: 9,
             from_col: 7,
             to_row: 8,
@@ -121,7 +121,7 @@ describe('White pawn movement', () => {
     test('Debe poseer un movimiento 1 fila hacia adelante a la derecha.', async () => {
         const moveWhitePawn = await whitePawn(board3, 10, 3, eatBlackPiece);
         expect(moveWhitePawn).toEqual(expect.arrayContaining([{
-            value: 1125,
+            value: 8250,
             from_row: 10,
             from_col: 3,
             to_row: 9,
@@ -132,7 +132,7 @@ describe('White pawn movement', () => {
     test('Debe poseer un movimiento 1 fila hacia adelante a la izquierda.', async () => {
         const moveWhitePawn = await whitePawn(board3, 10, 3, eatBlackPiece);
         expect(moveWhitePawn).toEqual(expect.arrayContaining([{
-            value: 1125,
+            value: 8250,
             from_row: 10,
             from_col: 3,
             to_row: 9,

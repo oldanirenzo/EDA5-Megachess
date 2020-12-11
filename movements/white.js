@@ -41,10 +41,6 @@ const whiteMovements = (data) => {
                     }
                 })
             })
-            .finally(() => {
-                movementsArray = []
-                whiteBestMovement = []
-            })
     })
 }
 
@@ -92,7 +88,7 @@ const whitePiecesMovements = async (board, sameColor, movementsArray) => {
             allMovements.push(children)
         });
     });
-    
+
     return allMovements;
 }
 
