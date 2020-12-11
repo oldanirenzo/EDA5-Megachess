@@ -13,7 +13,7 @@ const king = async (board, from_row, from_col, sameColor, eatPiece, movePiece) =
         for (let col = -1; col < 2; col++) {
 
             // Si se sale del tablero con ese movimiento, entra al proximo loop.
-            if ((from_row + row || from_col + col) > 15 || (from_row + row || from_col + col) < 0) {
+            if (from_row + row > 15 || from_col + col > 15 || from_row + row < 0 || from_col + col < 0) {
                 continue;
             }
             // Encontro una pieza aliada, asi que pasa al siguiente loop.

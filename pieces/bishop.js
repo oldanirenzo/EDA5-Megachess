@@ -10,11 +10,11 @@ const bishop = async (board, from_row, from_col, sameColor, eatPiece, movePiece)
     // MOVIMIENTO DIAGONAL ARRIBA A LA DERECHA
     diagonalArribaDerecha: for (let x = 1; x < 16; x++) {
 
-        // Encontro una pieza aliada, asi que pasa al siguiente loop.
         if (from_col + x > 15 || from_row - x < 0) {
             break diagonalArribaDerecha;
         };
-
+        
+        // Encontro una pieza aliada, asi que pasa al siguiente loop.
         if (sameColor.includes(board[from_row - x][from_col + x])) {
             break diagonalArribaDerecha;
         }
@@ -44,6 +44,7 @@ const bishop = async (board, from_row, from_col, sameColor, eatPiece, movePiece)
     // MOVIMIENTO DIAGONAL ARRIBA A LA IZQUIERDA
 
     diagonalArribaIzquierda: for (let y = 1; y < 16; y++) {
+        
         if (from_col - y < 0 || from_row - y < 0) {
             break diagonalArribaIzquierda;
         }
