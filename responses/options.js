@@ -26,11 +26,11 @@ const decideAction = (data) => {
                     console.log(data.data)
                 } else {
                     blackMovements(data)
-                    .then(movement => {
-                        resolve(movement)
-                    })
-                    .catch(err => reject(err))
-                console.log(data.data)
+                        .then(movement => {
+                            resolve(movement)
+                        })
+                        .catch(err => reject(err))
+                    console.log(data.data)
                 }
                 break;
 
@@ -41,9 +41,12 @@ const decideAction = (data) => {
             case 'update_user_list':
                 console.log(data)
                 break;
-
+            case 'response_error':
+                console.log(data)
+                break;
             default:
-                console.log('No se encontro la opción.')
+                console.log('Opcion no conocida.')
+                console.log(data)
                 break;
         }
     })
